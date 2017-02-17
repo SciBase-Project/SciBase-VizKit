@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+      <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Home | SciBase</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="stylesheets/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="stylesheets/animate.min.css" rel="stylesheet"> 
+    <link rel="stylesheet" type="text/css" href="stylesheets/lightbox.css" rel="stylesheet"> 
+    <link rel="stylesheet" type="text/css" href="stylesheets/main.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="stylesheets/responsive.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+
+
+</head>
+<body>
+
+    <header id="header">
+    <div class="navbar navbar-inverse" role="banner">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a class="navbar-brand" href="/">
+                    <h1><img src="images/logo.png" alt="logo"></h1>
+                </a>
+
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li><a href="/team">The Team</a></li>
+                    <li><a href="/publications">Publications</a></li>
+                    <li><a href="/datacenter">Data Center</a></li>
+                    <li><a href="http://oprs.pesitsouthscibase.org">OPRS</a></li>               
+                    <li><a href="https://goo.gl/ZdfzMy">Public Survey</a></li>               
+                </ul>
+            </div>
+            <div class="search">
+                <form role="form">
+                    <i class="fa fa-search"></i>
+                    <div class="field-toggle">
+                        <input type="text" class="search-form" autocomplete="off" placeholder="Search">
+                    </div>
+                </form>
+            </div>
+        </div>
+        </div>
+</header>
+<!--/#header-->
+
+<section id="home-slider">
+    <div class="container">
+            <div class="main-slider">
+            <div class="row">
+                <div class="col-md-6">
+                      <div class="slide-text">
+                    <h1>Welcome to SciBase!</h1>
+                    <p>A study in Machine Learning, Repository and the first complete Web-Dictionary of Scholastic Information System</p>
+                </div>
+                </div>
+                <div class="col-md-6">
+                      <a href="http://pesitsouth.pes.edu/camms"><img src="images/home/slider/hill.png" class="slider-hill" alt="slider image"></a>
+                </div>
+            </div>
+              
+              
+              <!--   <img src="images/home/slider/house.png" class="slider-house" alt="slider image">
+                <img src="images/home/slider/sun.png" class="slider-sun" alt="slider image">
+                <img src="images/home/slider/birds1.png" class="slider-birds1" alt="slider image">
+                <img src="images/home/slider/birds2.png" class="slider-birds2" alt="slider image"> -->
+            </div>
+<div class="row">
+    
+                      <div class="col-md-6 col-md-offset-3  text-center">
+                <!--<a href="/login" class="btn btn-common">Login</a>
+                <a href="/register" class="btn btn-common">Register</a>-->
+                <div>
+                    <h2 class="post-title center">View charts for any journal</h2>
+                    <br>
+                    <form method="POST" action="/public_articles">
+                      <select class="form-control">
+                      <option value="main">All Journal Data</option>
+                      <option value="1">ACM Transactions on Internet Technology</option>
+                      <option value="2">ACM Transactions on Economics and Computation</option>
+                      <option value="3">Journal of Experimental Algorithmics</option>
+                      <option value="4">ACM Transactions on the Web</option>
+                      <option value="5">ACM Transactions on Intelligent Systems and Technology</option>
+                      <option value="6">ACM Transactions on Computer Systems</option>
+  <option value="7">ACM Transactions on Modelling and Computer Simulations</option>
+</select>
+                    </form>
+                </div>
+              </div>
+              </div>
+              <br>
+              <div class="main">
+        <div class="row">
+        <div class="col-md-6">
+        <div id="plotly-div1"></div>
+</div>
+<div class="col-md-6">
+        <div id="plotly-div2">
+        </div>
+</div>
+        </div>
+           <div class="row">
+        <div class="col-md-6">
+        <div id="plotly-div3"></div>
+</div>
+<div class="col-md-6">
+        <div id="plotly-div4">
+        
+      </div>
+</div>
+        </div>
+          <div class="row">
+        <div class="col-md-12">
+        <div id="plotly-div5"></div>
+</div>
+</div>
+</div>
+  <div class="1 box">
+        <div class="row">
+        <div class="col-md-6">
+        <div id="plotly-div11"></div>
+</div>
+<div class="col-md-6">
+        <div id="plotly-div12">
+        </div>
+</div>
+        </div>
+           <div class="row">
+        <div class="col-md-6">
+        <div id="plotly-div13"></div>
+</div>
+<div class="col-md-6">
+        <div id="plotly-div14">
+        
+      </div>
+</div>
+        </div>
+          <div class="row">
+        <div class="col-md-12">
+        <div id="plotly-div45">
+</div>
+</div>
+</div>
+</div>
+  <div class="2 box">
+        <div class="row">
+        <div class="col-md-6">
+        <div id="plotly-div21">
+            
+        </div>
+</div>
+<div class="col-md-6">
+        <div id="plotly-div22">
+        </div>
+</div>
+        </div>
+           <div class="row">
+        <div class="col-md-6">
+        <div id="plotly-div23"></div>
+</div>
+<div class="col-md-6">
+        <div id="plotly-div24">
+        
+      </div>
+</div>
+        </div>
+          <div class="row">
+        <div class="col-md-12">
+        <div id="plotly-div25"></div>
+</div>
+</div>
+</div>
+  <div class="3 box">
+        <div class="row">
+        <div class="col-md-6">
+        <div id="plotly-div31"></div>
+</div>
+<div class="col-md-6">
+        <div id="plotly-div32">
+        </div>
+</div>
+        </div>
+           <div class="row">
+        <div class="col-md-6">
+        <div id="plotly-div33"></div>
+</div>
+<div class="col-md-6">
+        <div id="plotly-div34">
+        
+      </div>
+</div>
+        </div>
+          <div class="row">
+        <div class="col-md-12">
+        <div id="plotly-div75">
+</div>
+</div>
+</div>
+</div>
+  <div class="4 box">
+        <div class="row">
+        <div class="col-md-6">
+        <div id="plotly-div41"></div>
+</div>
+<div class="col-md-6">
+        <div id="plotly-div42">
+        </div>
+</div>
+        </div>
+           <div class="row">
+        <div class="col-md-6">
+        <div id="plotly-div43"></div>
+</div>
+<div class="col-md-6">
+        <div id="plotly-div44">
+        
+      </div>
+</div>
+        </div>
+          <div class="row">
+        <div class="col-md-12">
+        <div id="plotly-div15"></div>
+        
+</div>
+</div>
+</div>
+  <div class="5 box">
+        <div class="row">
+        <div class="col-md-6">
+        <div id="plotly-div51"></div>
+</div>
+<div class="col-md-6">
+        <div id="plotly-div52">
+        </div>
+</div>
+        </div>
+           <div class="row">
+        <div class="col-md-6">
+        <div id="plotly-div53"></div>
+</div>
+<div class="col-md-6">
+        <div id="plotly-div54">
+        
+      </div>
+</div>
+        </div>
+          <div class="row">
+        <div class="col-md-12">
+        <div id="plotly-div65"></div>
+</div>
+</div>
+</div>
+  <div class="6 box">
+        <div class="row">
+        <div class="col-md-6">
+        <div id="plotly-div61"></div>
+</div>
+<div class="col-md-6">
+        <div id="plotly-div62">
+        </div>
+</div>
+        </div>
+           <div class="row">
+        <div class="col-md-6">
+        <div id="plotly-div63"></div>
+</div>
+<div class="col-md-6">
+        <div id="plotly-div64">
+        
+      </div>
+</div>
+        </div>
+          <div class="row">
+        <div class="col-md-12">
+        <div id="plotly-div55"></div>
+</div>
+</div>
+</div>
+  <div class="7 box">
+        <div class="row">
+        <div class="col-md-6">
+        <div id="plotly-div71"></div>
+</div>
+<div class="col-md-6">
+        <div id="plotly-div72">
+        </div>
+</div>
+        </div>
+           <div class="row">
+        <div class="col-md-6">
+        <div id="plotly-div73"></div>
+</div>
+<div class="col-md-6">
+        <div id="plotly-div74">
+        
+      </div>
+</div>
+        </div>
+          <div class="row">
+        <div class="col-md-12">
+        <div id="plotly-div35"></div>
+</div>
+</div>
+</div>
+        
+
+    
+       
+
+
+</section>
+<!--/#home-slider-->
+
+<section id="services">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4 text-center padding wow fadeIn" data-wow-duration="1000ms" data-wow-delay="300ms">
+                <div class="single-service">
+                    <div class="wow scaleIn" data-wow-duration="500ms" data-wow-delay="300ms">
+                        <img src="images/home/icon1.png" alt="">
+                    </div>
+                    <h2>SciBase Graph</h2>
+                    <p>The SciBase project aims to model entity data and relationships between every author, article and journal in the world as a graph. This graph is openly accessible to users through code as well as dynamic datasets. </p>
+                </div>
+            </div>
+            <div class="col-sm-4 text-center padding wow fadeIn" data-wow-duration="1000ms" data-wow-delay="600ms">
+                <div class="single-service">
+                    <div class="wow scaleIn" data-wow-duration="500ms" data-wow-delay="600ms">
+                        <img src="images/home/icon2.png" alt="">
+                    </div>
+                    <h2>SciBase VizKit</h2>
+                    <p>A crucial aim of the SciBase project is to be able to exploit hidden patterns and relationships in the SciBase Graph to derive metrics for deeper understanding and analysis of author/article/journal data. The VizKit platform allows users to do just that albeit in an elegantly visual manner.</p>
+                </div>
+            </div>
+            <div class="col-sm-4 text-center padding wow fadeIn" data-wow-duration="1000ms" data-wow-delay="900ms">
+                <div class="single-service">
+                    <div class="wow scaleIn" data-wow-duration="500ms" data-wow-delay="900ms">
+                        <a href="http://oprs.pesitsouthscibase.org/public_articles"><img src="images/home/icon3.png" alt=""></a>
+                    </div>
+                    <h2>SciBase Open Peer Review</h2>
+                    <p>The Open Peer Review (OPR) is an open and transparent framework that allows the community to engage in positive scientific discussion/critique about existing research work in the scientific domain. Users can host their work independenty or choose to discuss existing content fetched from <em>ArXiv</em></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/#services-->
+
+<!-- <section id="action" class="responsive">
+    <div class="vertical-center">
+         <div class="container">
+            <div class="row">
+                <div class="action take-tour">
+                    <div class="col-sm-7 wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">
+                        <h1 class="title">Triangle Corporate Template</h1>
+                        <p>A responsive, retina-ready &amp; wide multipurpose template.</p>
+                    </div>
+                    <div class="col-sm-5 text-center wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
+                        <div class="tour-button">
+                            <a href="#" class="btn btn-common">TAKE THE TOUR</a>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> -->
+<section id="action">
+    <div class="vertical-center">
+         <div class="container">
+            <div class="row">
+                <div class="action count">
+                    <div class="col-sm-3 text-center wow bounceIn" data-wow-duration="1000ms" data-wow-delay="300ms">
+                        <a href="{{ JournalCsvUrl }}" title="Download CSV" download>
+                            <h1 class="timer bold" data-speed="3000" data-from="0">{{ journal_count }}</h1>
+                            <h3><span>Journals</span></h3>
+                        </a>
+                    </div>
+                    <div class="col-sm-3 text-center wow bounceIn" data-wow-duration="1000ms" data-wow-delay="300ms">
+                        <a href="{{ ArticleCsvUrl }}" title = "Download CSV" download>
+                            <h1 class="timer bold" data-speed="3000" data-from="0">{{ article_count }}</h1>
+                            <h3><span>Articles</span></h3>
+                        </a>
+                    </div>
+                    <div class="col-sm-3 text-center wow bounceIn" data-wow-duration="1000ms" data-wow-delay="300ms">
+                        <a href="{{ AuthorCsvUrl }}" title = "Download CSV" download>
+                            <h1 class="timer bold" data-speed="3000" data-from="0">{{ author_count }}</h1>
+                            <h3><span>Authors</span></h3>
+                        </a>
+                    </div>
+                    <div class="col-sm-3 text-center wow bounceIn" data-wow-duration="1000ms" data-wow-delay="300ms">
+                        <a href="{{ InstitutionCsvUrl }}" title = "Download CSV" download>
+                            <h1 class="timer bold" data-speed="3000" data-from="0">{{ institution_count }}</h1>
+                            <h3><span>Institutions</span></h3>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/#action-->
+
+    <div class="col-sm-12" style="margin:100px 0px;">
+            <div class="zoomViewport slideshowContainer">
+                <div class="zoomContainer text-center row">
+                    <div class="col-sm-4 container-fluid">
+                            <div class="content-holder zoomTarget wow slideInLeft" data-wow-duration="1000ms" data-wow-delay="300ms" style="margin:0 Auto;">
+                                <h3>NLIQ</h3>
+                                <p>Non-local influence is the number of citations made from one paper in a given journal, to a number of different journals - divided by the total number of citations. NLIQ = 0 implies there is no diffusion.</p>
+
+                            </div>
+                        
+                    </div>
+                     <div class="col-sm-4 container-fluid">
+                                                  
+                            <div class="content-holder zoomTarget wow bounceIn" data-wow-duration="1000ms" data-wow-delay="300ms" style="margin:0 Auto;">
+                                 <h3>%IC</h3>
+                                <p>International collaboration accounts for the articles that have been produced by researchers from several countries. Every author's country is matched with the country of publishing journal. Ratio is calculated on the basis of weights assigned to different combination of authors affiliation and origin of the publishing journal.</p>
+                            
+                            </div>
+                        
+                    </div>
+                     <div class="col-sm-4 container-fluid">
+                                                  
+                            <div class="content-holder zoomTarget wow slideInRight" data-wow-duration="1000ms" data-wow-delay="300ms" style="margin:0 Auto;">
+                               <h3>OCQ</h3>
+                               <p>Other-Citations Quotient is 1- (self-citations/total citations); where  self-citations of a paper S is considered a self-citation of P, if P and S share at least one author. Total citations is the number of citations of a journal.</p>
+                            </div>
+                        
+                    </div>
+                     <div class="col-sm-6 container-fluid">
+                                                  
+                            <div class="content-holder zoomTarget wow bounceIn" data-wow-duration="1000ms" data-wow-delay="300ms" style="margin:0 Auto;">
+                                <h3>SNIP</h3>
+                                <p>SNIP is the ratio of a source's average citation count per paper, and the citation potential of its subject field</p>
+
+                            
+                            </div>
+                        
+                    </div>
+                    <div class="col-sm-6 container-fluid">
+                                                 
+                            <div class="content-holder zoomTarget wow bounceIn" data-wow-duration="1000ms" data-wow-delay="300ms" style="margin:0 Auto;">
+                                <h3>COPIOUS CITATIONS</h3>
+                                <p>Copious citations is defined as, if between two authors A and B, say; A cites all published papers of B and vice-versa.</p>
+                            
+                            </div>
+                        
+                    </div>
+                        <div class="clearer"></div>
+                </div>
+            </div>
+
+            <div class="slideshowNavigation clearfix col-sm-12 text-center">
+            <center>
+                <button class="zoomButton btn btn-lg btn-primary" data-type="prev" data-root=".slideshowContainer"><span class="glyphicon glyphicon-chevron-left"></span></button>
+                <button class="zoomButton btn btn-lg btn-primary" data-type="next" data-root=".slideshowContainer"><span class="glyphicon glyphicon-chevron-right"></span></button>
+            </center>
+            </div>
+    </div>
+    <br>
+
+<section id="features">
+    <div class="container col-sm-12">
+        <div class="row">
+            <div class="single-features">
+                <div class="col-sm-5 wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">
+                    <!-- <img src="images/home/image1.png" class="img-responsive" alt=""> -->
+                    <iframe width="420" height="215" src="https://www.youtube.com/embed/8IuQzq8fEYU" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="col-sm-5 wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
+                    <h2>Internationality of Journals</h2>
+                    <P>Measuring internationality of scientific journals is an open problem as there exists no metric to rank journals based on the extent or scale of internationality. Measuring internationality is qualitative, vague and open to interpretations and vested interests. With the tremendous increase in the number of journals in various fields, it has become an absolute necessity to evaluate, rank and categorize journals based on internationality. Therefore, it is essential to validate the credibility of an International tag associated with any journal since this is driving a volume of faculties and research scholars to publish their work in International Journals than in National journals</P>
+                </div>
+            </div>
+            <div class="single-features">
+                <div class="col-sm-6 col-sm-offset-1 align-right wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">
+                    <h2>Cobb Douglass Production Function</h2>
+                    <P>Simulation of (IRS+DRS+CRS) Elasticity models using the Cobb Douglas Production Function.</P>
+                </div>
+                <div class="col-sm-5 wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
+                    <iframe width="420" height="215" src="https://www.youtube.com/embed/Uqyqgvkn3Yw" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+            <div class="single-features">
+                <div class="col-sm-5 wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">
+                    <!-- <img src="images/home/image1.png" class="img-responsive" alt=""> -->
+                    <iframe width="420" height="315" src="https://www.youtube.com/embed/2qrovyRxLYQ" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="col-sm-6 wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
+                    <h2>MTech Project Demo</h2>
+                    <P>Demo of an alternate data schema.</P>
+                </div>
+            </div>
+            <!-- <div class="single-features">
+                <div class="col-sm-5 wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">
+                    <iframe width="420" height="215" src="https://www.youtube.com/embed/vU8dCYocuyI" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="col-sm-6 wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
+                    <h2>Experienced and Enthusiastic</h2>
+                    <P>Ut officia cupidatat anim excepteur fugiat cillum ea occaecat rump pork chop tempor. Ut tenderloin veniam commodo. Shankle aliquip short ribs, chicken eiusmod exercitation shank landjaeger spare ribs corned beef.</P>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</section>
+ <!--/#features-->
+
+<!-- <section id="clients">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="clients text-center wow fadeInUp" data-wow-duration="500ms" data-wow-delay="300ms">
+                    <p><img src="images/home/clients.png" class="img-responsive" alt=""></p>
+                    <h1 class="title">Happy Clients</h1>
+                    <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <br> Ut enim ad minim veniam, quis nostrud </p>
+                </div>
+                <div class="clients-logo wow fadeIn" data-wow-duration="1000ms" data-wow-delay="600ms">
+                    <div class="col-xs-3 col-sm-2">
+                        <a href="#"><img src="images/home/client1.png" class="img-responsive" alt=""></a>
+                    </div>
+                    <div class="col-xs-3 col-sm-2">
+                        <a href="#"><img src="images/home/client2.png" class="img-responsive" alt=""></a>
+                    </div>
+                     <div class="col-xs-3 col-sm-2">
+                        <a href="#"><img src="images/home/client3.png" class="img-responsive" alt=""></a>
+                    </div>
+                     <div class="col-xs-3 col-sm-2">
+                        <a href="#"><img src="images/home/client4.png" class="img-responsive" alt=""></a>
+                    </div>
+                     <div class="col-xs-3 col-sm-2">
+                        <a href="#"><img src="images/home/client5.png" class="img-responsive" alt=""></a>
+                    </div>
+                     <div class="col-xs-3 col-sm-2">
+                        <a href="#"><img src="images/home/client6.png" class="img-responsive" alt=""></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ </section> -->
+<!--/#clients-->
+
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center bottom-separator">
+                <img src="images/home/under.png" class="img-responsive inline" alt="">
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-md-4 col-sm-6">
+            <h2>Quick Links</h2>
+            <ul>
+                <li><a href="http://pesitsouth.pes.edu/camms">CAMMS</a></li>
+                <li><a href="http://www.scimagojr.com/">SciMago</a></li>
+                <li><a href="http://aminer.org/">Aminer</a></li>
+                <li><a href="http://www.slp.org.in/collnet/">CollNet</a></li>
+                <li><a href="http://www.instmetrics.org/">Institute of Scientometrics</a></li>
+                <li><a href="http://sci-hub.io/">Sci-Hub</a></li>
+                <li><a href="http://arxiv.org/">Arxive</a></li>
+                <li><a href="http://www.journalmetrics.com/">JournalMetrics.com</a></li>
+                <li><a href="http://www.harzing.com/resources/publish-or-perish">Publish or Perish</a></li>
+                <li><a href="http://www.journalindicators.com/">CWTS Journal Indicators</a></li>
+            </ul>
+                <!-- <div class="testimonial bottom">
+                    <h2>Testimonial</h2>
+                    <div class="media">
+                        <div class="pull-left">
+                            <a href="#"><img src="images/home/profile1.png" alt=""></a>
+                        </div>
+                        <div class="media-body">
+                            <blockquote>Nisi commodo bresaola, leberkas venison eiusmod bacon occaecat labore tail.</blockquote>
+                            <h3><a href="#">- Jhon Kalis</a></h3>
+                        </div>
+                     </div>
+                    <div class="media">
+                        <div class="pull-left">
+                            <a href="#"><img src="images/home/profile2.png" alt=""></a>
+                        </div>
+                        <div class="media-body">
+                            <blockquote>Capicola nisi flank sed minim sunt aliqua rump pancetta leberkas venison eiusmod.</blockquote>
+                            <h3><a href="">- Abraham Josef</a></h3>
+                        </div>
+                    </div>
+                </div>  -->
+            </div>
+            <div class="col-md-4 col-sm-6">
+                    <div class="contact-info bottom">
+                        <h2>Contacts</h2>
+                        <address>
+                        E-mail: <a href="mailto:scibase@pes.edu">scibase@pes.edu</a> <br>
+                        </address>
+
+                        <h2>Address</h2>
+                        <address>
+                        PES Institute of Technology - Bangalore South Campus <br>
+                        Hosur Road, <br>
+                        (1km before Electronic City), <br>
+                        Bangalore KA - 560100 <br>
+                        </address>
+                    </div>
+                </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="contact-form bottom">
+                    <h2>Send a message</h2>
+                    <form id="main-contact-form" name="contact-form" method="post" action="sendemail.php">
+                        <div class="form-group">
+                            <input type="text" name="name" class="form-control" required="required" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" class="form-control" required="required" placeholder="Email Id">
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" id="message" required="required" class="form-control" rows="8" placeholder="Your text here"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" name="submit" class="btn btn-submit" value="Submit">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-sm-12">
+                    <div class="copyright-text text-center">
+                        <p>&copy; SciBase | PES Institute of Technology - Bangalore South Campus. All Rights Reserved.</p>
+                    </div>
+                </div>
+        </div>
+        </div>
+</footer>
+   <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <script
+  src="https://code.jquery.com/jquery-3.1.1.js"
+  integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+  crossorigin="anonymous"></script>
+  <script src="javascripts/bootstrap.min.js"></script>
+    <script src="javascripts/lightbox.min.js"></script>
+    <script src="javascripts/wow.min.js"></script>
+    <script src="javascripts/jquery.zoomooz.min.js"></script>
+    <script src="javascripts/jquery.countTo.js"></script>
+    <script src="javascripts/main.js"></script>
+    <script src="javascripts/script.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="javascripts/graphs.js"></script>
+  <script>if (window.module) module = window.module;</script>
+ 
+</body>
+</html>
