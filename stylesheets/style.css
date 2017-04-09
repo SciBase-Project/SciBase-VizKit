@@ -20,7 +20,7 @@ a {
 .zoomContainer .col-sm-4, .col-sm-6{
 
 	margin-top:20px;
-	
+
 }
 .content-holder{
 	margin:20px;
@@ -41,6 +41,18 @@ a {
 	font-size:24px;
 	font-weight: bold;
 }
+.title{
+    background-color: #34495e;
+    height:60px;
+}
+.titletext{
+    
+    color:white;
+    font-size: 35px;
+}
 .slideshowNavigation button{
 	margin:20px;
+}
+.navbar{
+    border-radius: 0px
 }
