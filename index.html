@@ -1,53 +1,123 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title></title>
-      <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | SciBase</title>
     <link rel="stylesheet" type="text/css" href="stylesheets/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="stylesheets/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="stylesheets/animate.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
-    <link rel="stylesheet" type="text/css" href="stylesheets/photon.css">
-    <!--[if lt IE 9]>
-      <script src="js/html5shiv.js"></script>
-      <script src="js/respond.min.js"></script>
-    <![endif]-->
-
+    <link rel="stylesheet" href="stylesheets/flat-ui.css">
+    <link rel="stylesheet" href="stylesheets/photon.css">
 </head>
+
 <body>
-<!--/#header-->
-<div class="window">
-  <div class="window-content">
-    <div class="pane-group">
-      <div class="pane-sm sidebar">
-          <ul class="list-group">
-  <li class="list-group-header">
-    <input class="form-control" type="text" placeholder="Search for someone">
-  </li>
-      </div>
-      <div class="pane">
-          <div class="col-md-12">
-            <div class="text-center">
-          <h1>SciBaseVizkit</h1>
-<input class="form-control" type="text" placeholder="Search for someone">
-      </div>
-      </div></div>
-    </div>
+    <div class="window">
+      <div class="window-content">
+        <div class="pane-group">
+          <div class="pane-sm sidebar"></div>
+          <div class="pane">
+              <nav class="navbar navbar-default" role="navigation">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+      <span class="sr-only">Toggle navigation</span>
+    </button>
+    <a class="navbar-brand">SciBaseVizkit</a>
   </div>
+  <div class="collapse navbar-collapse" id="navbar-collapse-01">
+    <form class="navbar-form navbar-right" action="#" role="search">
+      <div class="form-group">
+        <div class="input-group">
+          <input class="form-control" id="navbarInput-01" type="search" placeholder="Search">
+          <span class="input-group-btn">
+            <button type="submit" class="btn"><span class="fui-search"></span></button>
+          </span>
+        </div>
+      </div>
+    </form>
+  </div><!-- /.navbar-collapse -->
+</nav><!-- /navbar -->
+<div class="row">
+
+                      <div class="col-md-6 col-md-offset-3  text-center">
+                <!--<a href="/login" class="btn btn-common">Login</a>
+                <a href="/register" class="btn btn-common">Register</a>-->
+                <div>
+                    <h2 class="post-title center">View charts for any journal</h2>
+                    <br>
+                    <form method="POST" action="/public_articles">
+                      <select class="form-control" id="graphs">
+</select>
+                    </form>
+                </div>
+              </div>
+              </div>
+              <br>
+              <div class="main">
+        <div class="row">
+        <div class="col-md-6">
+        <div id="my-graph1" class="graphsize"></div>
+</div>
+<div class="col-md-6">
+        <div id="my-graph2" class="graphsize">
+        </div>
+</div>
+        </div>
+           <div class="row">
+        <div class="col-md-6">
+        <div id="my-graph3" class="graphsize"></div>
+</div>
+<div class="col-md-6">
+        <div id="my-graph4" class="graphsize">
+
+      </div>
+</div>
+        </div>
 </div>
 
-   <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
-    <script
-  src="https://code.jquery.com/jquery-3.1.1.js"
-  integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
-  crossorigin="anonymous"></script>
-  <script src="javascripts/bootstrap.min.js"></script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-  <script>if (window.module) module = window.module;</script>
+<div class="sub">
+        <div class="row">
+        <div class="col-md-6">
+        <div class="graph1"></div>
+</div>
+<div class="col-md-6">
+        <div class="graph2">
+        </div>
+</div>
+        </div>
+           <div class="row">
+        <div class="col-md-6">
+        <div class="graph3"></div>
+</div>
+<div class="col-md-6">
+        <div class="graph4">
+
+      </div>
+</div>
+        </div>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        if (typeof module === 'object') {
+            window.module = module;
+            module = undefined;
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+    <script src="javascripts/bootstrap.min.js"></script>
+    <script src="./plotly-latest.min.js"></script>
+    <script src="javascripts/flat-ui.js"></script>
+    <script src="./csvgraphs.js"></script>
+    <script src="./papaparse.js"></script>
+    <script>
+        if (window.module) module = window.module;
+    </script>
 
 </body>
+
 </html>

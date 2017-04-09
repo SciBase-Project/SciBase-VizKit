@@ -23,7 +23,7 @@ function createWindow () {
   }))
 
   // Open the DevTools.
-  
+
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
@@ -58,3 +58,12 @@ app.on('activate', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+var util = require("./util");
+var mongoose = require("mongoose");
+var schema = mongoose.Schema;
+
+var updateCsv = new schema({
+    name : String,
+    update_next: { type: Date, default : Date.now },
+},{collection : "counts"});
+var updateCsvModel = mongoose.model("updateCsvModel", updateCsv);
