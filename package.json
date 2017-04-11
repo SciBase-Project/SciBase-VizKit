@@ -9,6 +9,7 @@
   "repository": "https://github.com/SciBase-Project/SciBase-VizKit",
   "author": "Harsha Vamsi",
   "license": "CC0-1.0",
+
   "dependencies": {
     "apidoc": "^0.15.1",
     "body-parser": "~1.13.2",
