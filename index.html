@@ -17,7 +17,9 @@
     <div class="window">
       <div class="window-content">
         <div class="pane-group">
-          <div class="pane-sm sidebar"></div>
+          <div class="pane-sm sidebar">
+              <button class="btn btn-primary btn-lg" id="button">update</button>
+          </div>
           <div class="pane">
               <nav class="navbar navbar-default" role="navigation">
   <div class="navbar-header">
@@ -117,6 +119,32 @@
     <script>
         if (window.module) module = window.module;
     </script>
+    <script>
+    $(document).ready(function() {
+    var express = require('express');
+    var router = express.Router();
+    var request = require("request");
+    var fs = require("fs");
+    var path = require("path");
+    var util = require("./util");
+    var hbs = require('hbs');
+    var mongoose = require("mongoose");
+    var svgCaptcha = require("svg-captcha");
+    var crypto = require("crypto");
+    var reqq = require("sync-request")
+
+            util.generateJournalList(function(journals) {
+                    util.generateAllArticleCitvsYearCsv();
+                    for (k = 0; k < journals.length; k++) {
+                        util.generateArticleCitvsYearCsv(journals[k]);
+                    }
+                    util.writetoCSV();
+
+                })
+
+})
+
+  </script>
 
 </body>
 
