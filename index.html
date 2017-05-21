@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html>
 
 <head>
     <title></title>
@@ -19,7 +18,19 @@
         <div class="pane-group">
 
           <div class="pane-sm sidebar">
-              <button class="btn btn-primary btn-lg" id="button">update</button>
+              <div class="form-group">
+                <div class="input-group">
+                  <input class="form-control" id="search-query" type="search" placeholder="Search">
+                  <span class="input-group-btn">
+                    <button type="submit" class="btn" id="quicksearch"><span class="fui-search" ></span></button>
+                  </span>
+                </div>
+              </div>
+              <div class="results"></div>
+              <div class="searches">
+                  <p>Recent queries</p>
+              </div>
+
           </div>
 
           <div class="pane">
@@ -31,16 +42,7 @@
     <a class="navbar-brand">SciBaseVizkit</a>
   </div>
   <div class="collapse navbar-collapse" id="navbar-collapse-01">
-    <form class="navbar-form navbar-right" action="#" role="search">
-      <div class="form-group">
-        <div class="input-group">
-          <input class="form-control" id="navbarInput-01" type="search" placeholder="Search">
-          <span class="input-group-btn">
-            <button type="submit" class="btn"><span class="fui-search"></span></button>
-          </span>
-        </div>
-      </div>
-    </form>
+
   </div><!-- /.navbar-collapse -->
 </nav><!-- /navbar -->
 <div class="row">
@@ -62,7 +64,7 @@
               <div class="main">
         <div class="row">
         <div class="col-md-6">
-        <div id="my-graph1" class="graphsize"></div>
+        <div id="my-graph1" ></div>
 </div>
 <div class="col-md-6">
         <div id="my-graph2" class="graphsize">
@@ -106,13 +108,26 @@
         </div>
       </div>
     </div>
-    <script>
-        if (typeof module === 'object') {
-            window.module = module;
-            module = undefined;
-        }
-    </script>
-    <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+
+  </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
     <script src="javascripts/bootstrap.min.js"></script>
     <script src="./plotly-latest.min.js"></script>
     <script src="javascripts/flat-ui.js"></script>
@@ -122,6 +137,187 @@
         if (window.module) module = window.module;
     </script>
 
+    <script>
+    function showgraph(test){
+        id1 = 'graph-' + test + '1';
+        $(".graph1").attr('id', id1);
+        id2 = 'graph-' + test + '2';
+        $(".graph2").attr('id', id2);
+        id3 = 'graph-' + test + '3';
+        $(".graph3").attr('id', id3);
+        id4 = 'graph-' + test + '4';
+        $(".graph4").attr('id', id4);
+        $(".sub").show();
+        $(".main").hide();
+        path = "public/files/graphcsv/" + test + ".csv"
+        console.log(path)
+
+        name1 = 'graph-' + test + '1';
+        name2 = 'graph-' + test + '2';
+        name3 = 'graph-' + test + '3';
+        name4 = 'graph-' + test + '4';
+        Plotly.d3.csv(path, function(err, rows) {
+            trace00 = {
+                x: rows.map(function(row) { return row['Year'] }),
+                y: rows.map(function(row) { return row['ArticleCount'] }),
+                name: 'ArticleCount',
+                text: rows.map(function(row) { return row['Month'] }),
+                type: 'bar',
+                xaxis: 'x',
+                yaxis: 'y',
+            };
+            trace01 = {
+                x: rows.map(function(row) { return row['Year'] }),
+                y: rows.map(function(row) { return row['CitationCount'] }),
+                name: 'CitationCount',
+                text: rows.map(function(row) { return row['Month'] }),
+                type: 'bar',
+            };
+            data0 = [trace00, trace01];
+            layout0 = {
+                autosize: true,
+                hovermode: 'closest',
+                title: "Article count vs Citation Count",
+                xaxis: {
+                    autorange: true,
+                    domain: [0, 1],
+                    range: [2004.5, 2016.5],
+                    type: 'linear'
+                },
+                yaxis: {
+                    autorange: true,
+                    domain: [0, 1],
+                    range: [0, 100],
+                    type: 'linear'
+                }
+            };
+            Plotly.plot(name1, {
+                data: data0,
+                layout: layout0,
+            });
+
+            Plotly.d3.csv(path, function(err, rows) {
+                var POP_TO_PX_SIZE = 2e10;
+                var trace1 = {
+                    mode: 'markers',
+                    type: 'bar',
+                    x: rows.map(function(row) { return row['Year'] }),
+                    y: rows.map(function(row) { return row['CitationCount'] }),
+                    text: rows.map(function(row) { return row['Name'] }),
+                };
+
+                layout1 = {
+                    autosize: true,
+                    hovermode: 'closest',
+                    legend: {
+                        x: 0.5,
+                        y: -0.25,
+                        orientation: "h",
+                        traceorder: "normal",
+                        xanchor: "center",
+                    },
+
+                    title: "Citation count vs Year",
+                    xaxis: {
+                        autorange: true,
+                        range: [2009.5, 2016.5],
+                        title: 'Year',
+                        type: 'linear'
+                    },
+                    yaxis: {
+                        autorange: true,
+                        range: [0, 4047.36842105],
+                        title: 'Citation Count',
+                        type: 'linear'
+                    }
+                };
+                Plotly.plot(name2, [trace1], layout1, { showLink: false });
+            });
+            Plotly.d3.csv(path, function(err, rows) {
+                var POP_TO_PX_SIZE = 2e10;
+                var trace2 = {
+                    mode: 'markers',
+                    type: 'bar',
+                    x: rows.map(function(row) { return row['Year'] }),
+                    y: rows.map(function(row) { return row['ArticleCount'] }),
+                    text: rows.map(function(row) { return row['Name'] }),
+                };
+
+                var layout2 = {
+                    autosize: true,
+                    hovermode: "closest",
+                    legend: {
+                        x: 0.5,
+                        y: -0.25,
+                        orientation: "h",
+                        traceorder: "normal",
+                        xanchor: "center"
+                    },
+
+                    title: "Article count vs Year",
+                    xaxis: {
+                        autorange: true,
+                        fixedrange: false,
+                        range: [1982.5, 2016.5],
+                        title: "Year",
+                        type: "linear"
+                    },
+                    yaxis: {
+                        autorange: true,
+                        range: [0, 33.6842105263],
+                        title: "Article Count",
+                        type: "linear"
+                    }
+                };
+                Plotly.plot(name3, [trace2], layout2, { showLink: false });
+            });
+            Plotly.d3.csv(path, function(err, rows) {
+                var POP_TO_PX_SIZE = 2e10;
+                var trace3 = {
+                    mode: 'markers',
+                    type: 'pie',
+                    direction: "counterclockwise",
+                    hoverinfo: "label+value+text+percent",
+                    sort: true,
+                    textinfo: "value+percent",
+                    labels: rows.map(function(row) { return row['Month'] }),
+                    values: rows.map(function(row) { return row['ArticleCount'] }),
+                    text: rows.map(function(row) { return row['Name'] }),
+                };
+
+                var layout3 = {
+                    autosize: true,
+                    hovermode: "closest",
+                    legend: {
+                        x: 1.00343949045,
+                        y: 0.910994764398
+                    },
+                    title: "Article Count per month"
+                };
+                Plotly.plot(name4, [trace3], layout3, { showLink: false });
+            });
+
+        });
+        Plotly.deleteTraces(name1, 0);
+        Plotly.deleteTraces(name1, 0);
+        Plotly.deleteTraces(name2, 0);
+        Plotly.deleteTraces(name3, 0);
+        Plotly.deleteTraces(name4, 0);
+    }
+
+    </script>
+    <!-- <script>
+    var $modal = $('#myModal').modal({
+    show: false
+});
+$('#my-graph1').on('click', function() {
+    $modal.modal('show');
+    var html ='<p id="my-graph1"></p>'
+    $('#myModal').on('shown.bs.modal', function() {
+  $('#myModal').find('.modal-body').html(html);
+});
+
+});</script> -->
     <script>
     $(document).ready(function() {
     var express = require('express');
@@ -135,17 +331,84 @@
     var svgCaptcha = require("svg-captcha");
     var crypto = require("crypto");
     var reqq = require("sync-request")
+    var Datastore = require('nedb')
+  , db = new Datastore({ filename: './mydatabase.db' });
+  searchdb = new Datastore({ filename: './search.db' });
+db.loadDatabase(function (err) {    // Callback is optional
+  // Now commands will be executed
+});
+searchdb.loadDatabase(function (err) {    // Callback is optional
+  // Now commands will be executed
+});
+db.ensureIndex({ fieldName: 'name', unique: true }, function (err) {
+});
+searchdb.ensureIndex({ fieldName: 'query', unique: true }, function (err) {
+});
+searchdb.find({}, function (err, docs) {
+// docs contains Mars and Earth
+for(var i=0;i<docs.length;i++){
+    console.log(docs[i])
+var html='<a>'+docs[i]['query']+'</a>'+'<br>'
+$('.searches').append(html)
+}
+});
+function search(test){
+    $('.results').html("")
+    db.find({ name: new RegExp(test,'i') }, function (err, docs) {
+// docs contains Mars and Earth
+for(var i=0;i<docs.length;i++){
+var html='<a onclick="showgraph(\''+docs[i]['name']+'\')">'+docs[i]['name']+'</a>'+'<br>'
+$('.results').append(html)
+}
+});
+}
+var data =[];
+util.generateJournalList(function(journals) {
+    console.log(journals)
 
-            util.generateJournalList(function(journals) {
-                    util.generateAllArticleCitvsYearCsv();
-                    for (k = 0; k < journals.length; k++) {
-                        util.generateArticleCitvsYearCsv(journals[k]);
+                    console.log(journals.length)
+                    for(var i=0;i<journals.length;i++){
+                        var exists = true;
+                        var doc = { name: journals[i]
+               };
+                        db.insert({name:journals[i]}, function (err, newDoc) {   // Callback is optional
+                          // newDoc is the newly inserted document, including its _id
+                          // newDoc has no key called notToBeSaved since its value was undefined
+                        });
                     }
-                    util.writetoCSV();
 
-                })
+
+
+
+               });
+
+               $("#quicksearch").on('click',function(){
+                   $('.results').html("")
+                   query = $('#search-query').val()
+                   searchdb.insert({query:query}, function (err, newDoc) {   // Callback is optional
+                     // newDoc is the newly inserted document, including its _id
+                     // newDoc has no key called notToBeSaved since its value was undefined
+                   });
+                   db.find({ name: new RegExp(query,'i') }, function (err, docs) {
+   // docs contains Mars and Earth
+   for(var i=0;i<docs.length;i++){
+    var html='<a onclick="showgraph(\''+docs[i]['name']+'\')">'+docs[i]['name']+'</a>'+'<br>'
+    $('.results').append(html)
+   }
+ });
+               });
+
 
 })
+
+            // util.generateJournalList(function(journals) {
+            //         util.generateAllArticleCitvsYearCsv();
+            //         for (k = 0; k < journals.length; k++) {
+            //             util.generateArticleCitvsYearCsv(journals[k]);
+            //         }
+            //         util.writetoCSV();
+            //
+            //     })
 
   </script>
 

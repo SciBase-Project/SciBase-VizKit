@@ -1,4 +1,7 @@
 $(document).ready(function() {
+    function showgraph(test){
+        alert(test);
+    }
     $(".sub").hide(); // hide on page load
     $(".main").hide();
     $("select").change(function() {
