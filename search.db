@@ -1,0 +1,8 @@
+{"query":"qi","_id":"67VUpB2Lrrjq5iWo"}
+{"query":"qdqwd","_id":"7c5IxSM1ZFkokVwu"}
+{"query":"qwd","_id":"HSdyemDsA8KGJUhv"}
+{"query":"hello","_id":"MIDMuc3Td4GOe5DC"}
+{"query":"Computing","_id":"ZtmsuyEgHKcJTU3b"}
+{"query":"AC","_id":"b0Wp9gE5bhJVRyEs"}
+{"query":"ACM","_id":"nAAFMN8IFYYoukC1"}
+{"$$indexCreated":{"fieldName":"query","unique":true,"sparse":false}}
