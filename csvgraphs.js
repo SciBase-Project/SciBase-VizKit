@@ -1,9 +1,7 @@
 $(document).ready(function() {
-    function showgraph(test){
-        alert(test);
-    }
     $(".sub").hide(); // hide on page load
     $(".main").hide();
+    $("#goback").hide();
     $("select").change(function() {
         $(this).find("option:selected").each(function() {
             val = $(this).attr("value")
