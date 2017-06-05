@@ -1,8 +1,12 @@
 {"query":"qi","_id":"67VUpB2Lrrjq5iWo"}
 {"query":"qdqwd","_id":"7c5IxSM1ZFkokVwu"}
+{"query":"aad","_id":"9zdDkM8iOvbSXD9y"}
 {"query":"qwd","_id":"HSdyemDsA8KGJUhv"}
 {"query":"hello","_id":"MIDMuc3Td4GOe5DC"}
 {"query":"Computing","_id":"ZtmsuyEgHKcJTU3b"}
 {"query":"AC","_id":"b0Wp9gE5bhJVRyEs"}
+{"query":"asd","_id":"eiCX2FvG9YpCnSpb"}
+{"query":"computing","_id":"gAfsE9zCEbFAaUi6"}
+{"query":"acm","_id":"h357dNguXazTRZdU"}
 {"query":"ACM","_id":"nAAFMN8IFYYoukC1"}
 {"$$indexCreated":{"fieldName":"query","unique":true,"sparse":false}}

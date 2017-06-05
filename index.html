@@ -10,122 +10,386 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
     <link rel="stylesheet" href="stylesheets/flat-ui.css">
     <link rel="stylesheet" href="stylesheets/photon.css">
+    <link rel="stylesheet" href="/stylesheets/owl.carousel.min.css">
+    <link rel="stylesheet" href="/stylesheets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.19.1/vis.min.css">
+    <style>
+    a {
+    color: #1e7ad3;
+    text-decoration: none;
+}
+#mynetwork {
+    width: 100%;
+    height: 100vh;
+}
+#preloader{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100vh;
+    display : block;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+#preloader > i{
+    position: absolute;
+    top : 0;
+    left : 48%;
+    font-size : 50px;
+}
+.ref-selected{
+  background-color : rgb(198, 239, 255);
+}
+a:hover { text-decoration: underline }
+
+.container, .main {
+    width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 300px;
+}
+
+.main { margin-top: 50px }
+
+input {
+    font-family: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    color: #555860;
+}
+
+.search {
+    position: relative;
+    margin: 0 auto;
+    width: 300px;
+}
+
+.search input {
+    height: 26px;
+    width: 100%;
+    padding: 0 12px 0 25px;
+    background: white url("http://cssdeck.com/uploads/media/items/5/5JuDgOa.png") 8px 6px no-repeat;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #a8acbc #babdcc #c0c3d2;
+    border-radius: 13px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-box-shadow: inset 0 1px #e5e7ed, 0 1px 0 #fcfcfc;
+    -moz-box-shadow: inset 0 1px #e5e7ed, 0 1px 0 #fcfcfc;
+    -ms-box-shadow: inset 0 1px #e5e7ed, 0 1px 0 #fcfcfc;
+    -o-box-shadow: inset 0 1px #e5e7ed, 0 1px 0 #fcfcfc;
+    box-shadow: inset 0 1px #e5e7ed, 0 1px 0 #fcfcfc;
+}
+
+.search input:focus {
+    outline: none;
+    border-color: #66b1ee;
+    -webkit-box-shadow: 0 0 2px rgba(85, 168, 236, 0.9);
+    -moz-box-shadow: 0 0 2px rgba(85, 168, 236, 0.9);
+    -ms-box-shadow: 0 0 2px rgba(85, 168, 236, 0.9);
+    -o-box-shadow: 0 0 2px rgba(85, 168, 236, 0.9);
+    box-shadow: 0 0 2px rgba(85, 168, 236, 0.9);
+}
+
+.search input:focus + .results { display: block }
+
+.search .results {
+    position: absolute;
+    top: 35px;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    padding: 0;
+    margin: 0;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #cbcfe2 #c8cee7 #c4c7d7;
+    border-radius: 3px;
+    background-color: #fdfdfd;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fdfdfd), color-stop(100%, #eceef4));
+    background-image: -webkit-linear-gradient(top, #fdfdfd, #eceef4);
+    background-image: -moz-linear-gradient(top, #fdfdfd, #eceef4);
+    background-image: -ms-linear-gradient(top, #fdfdfd, #eceef4);
+    background-image: -o-linear-gradient(top, #fdfdfd, #eceef4);
+    background-image: linear-gradient(top, #fdfdfd, #eceef4);
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    -ms-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    -o-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.search .results li { display: block }
+
+.search .results li:first-child { margin-top: -1px }
+
+.search .results li:first-child:before, .search .results li:first-child:after {
+    display: block;
+    content: '';
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: 50%;
+    margin-left: -5px;
+    border: 5px outset transparent;
+}
+
+.search .results li:first-child:before {
+    border-bottom: 5px solid #c4c7d7;
+    top: -11px;
+}
+
+.search .results li:first-child:after {
+    border-bottom: 5px solid #fdfdfd;
+    top: -10px;
+}
+
+.search .results li:first-child:hover:before, .search .results li:first-child:hover:after { display: none }
+
+.search .results li:last-child { margin-bottom: -1px }
+
+.search .results a {
+    display: block;
+    position: relative;
+    margin: 0 -1px;
+    padding: 6px 40px 6px 10px;
+    color: #808394;
+    font-weight: 500;
+    text-shadow: 0 1px #fff;
+    border: 1px solid transparent;
+    border-radius: 3px;
+}
+
+.search .results a span { font-weight: 200 }
+
+.search .results a:before {
+    content: '';
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    margin-top: -9px;
+    background: url("http://cssdeck.com/uploads/media/items/7/7BNkBjd.png") 0 0 no-repeat;
+}
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0px;
+}
+.search .results a:hover {
+    text-decoration: none;
+    color: #fff;
+    text-shadow: 0 -1px rgba(0, 0, 0, 0.3);
+    border-color: #2380dd #2179d5 #1a60aa;
+    background-color: #338cdf;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #59aaf4), color-stop(100%, #338cdf));
+    background-image: -webkit-linear-gradient(top, #59aaf4, #338cdf);
+    background-image: -moz-linear-gradient(top, #59aaf4, #338cdf);
+    background-image: -ms-linear-gradient(top, #59aaf4, #338cdf);
+    background-image: -o-linear-gradient(top, #59aaf4, #338cdf);
+    background-image: linear-gradient(top, #59aaf4, #338cdf);
+    -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.2), 0 1px rgba(0, 0, 0, 0.08);
+    -moz-box-shadow: inset 0 1px rgba(255, 255, 255, 0.2), 0 1px rgba(0, 0, 0, 0.08);
+    -ms-box-shadow: inset 0 1px rgba(255, 255, 255, 0.2), 0 1px rgba(0, 0, 0, 0.08);
+    -o-box-shadow: inset 0 1px rgba(255, 255, 255, 0.2), 0 1px rgba(0, 0, 0, 0.08);
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.2), 0 1px rgba(0, 0, 0, 0.08);
+}
+
+:-moz-placeholder {
+    color: #a7aabc;
+    font-weight: 200;
+}
+
+::-webkit-input-placeholder {
+    color: #a7aabc;
+    font-weight: 200;
+}</style>
 </head>
 
 <body>
     <div class="window">
-      <div class="window-content">
-        <div class="pane-group">
+        <div class="window-content">
+            <div class="pane-group">
 
-          <div class="pane-sm sidebar">
-              <div class="form-group">
-                <div class="input-group">
-                  <input class="form-control" id="search-query" type="search" placeholder="Search">
-                  <span class="input-group-btn">
-                    <button type="submit" class="btn" id="quicksearch"><span class="fui-search" ></span></button>
-                  </span>
+                <div class="pane-sm sidebar">
+                    <ul class="list-group searches text-center">
+      <li class="list-group-header text-center">
+        <h4>Recent Queries</h4>
+      </li>
+    </ul>
+
                 </div>
-              </div>
-              <div class="results"></div>
-              <div class="searches">
-                  <p>Recent queries</p>
-              </div>
 
-          </div>
-
-          <div class="pane">
-              <nav class="navbar navbar-default" role="navigation">
-  <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+                <div class="pane">
+                    <nav class="navbar navbar-default" role="navigation">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
       <span class="sr-only">Toggle navigation</span>
     </button>
-    <a class="navbar-brand">SciBaseVizkit</a>
-  </div>
-  <div class="collapse navbar-collapse" id="navbar-collapse-01">
+                            <a class="navbar-brand">SciBaseVizkit</a>
+                        </div>
+                        <div class="collapse navbar-collapse" id="navbar-collapse-01">
 
-  </div><!-- /.navbar-collapse -->
-</nav><!-- /navbar -->
-<div class="row">
+                        </div>
+                        <!-- /.navbar-collapse -->
+                    </nav>
+                    <!-- /navbar -->
+                    <ul class="nav nav-tabs nav-justified">
+                      <li class="active "><a data-toggle="tab" href="#home">Graphs</a></li>
+                      <li><a data-toggle="tab" href="#menu1">RREF</a></li>
+                    </ul>
 
-                      <div class="col-md-6 col-md-offset-3  text-center">
-                <!--<a href="/login" class="btn btn-common">Login</a>
-                <a href="/register" class="btn btn-common">Register</a>-->
-                <div>
-                    <h2 class="post-title center">View charts for any journal</h2>
-                    <br>
-                    <form method="POST" action="/public_articles">
-                      <select class="form-control" id="graphs">
-</select>
-                    </form>
+                    <div class="tab-content">
+                      <div id="home" class="tab-pane fade in active">
+                          <div class="row">
+
+                              <div class="col-md-6 col-md-offset-3  text-center">
+
+                                  <!--<a href="/login" class="btn btn-common">Login</a>
+                      <a href="/register" class="btn btn-common">Register</a>-->
+                                  <div>
+                                      <h2 class="post-title center">View charts for any journal</h2>
+                                      <br>
+             <div class="search" method="post">
+                 <input type="text" name="q" placeholder="Search..." id="search-query" class=""/>
+                 <ul class="results" >
+
+                 </ul>
+             </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <br>
+
+
+                          <div class="sub">
+                              <a  class="btn btn-primary" id="goback">Back</a>
+                              <div class="row">
+                                  <div class="col-md-6">
+                                      <div class="graph1"></div>
+
+                                  </div>
+                                  <div class="col-md-6">
+                                      <div class="graph2">
+                                      </div>
+
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-6">
+                                      <div class="graph3"></div>
+
+                                  </div>
+                                  <div class="col-md-6">
+                                      <div class="graph4">
+
+                                      </div>
+
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div id="menu1" class="tab-pane fade">
+                          <section id="page-breadcrumb">
+                              <div class="vertical-center sun">
+                                   <div class="container">
+                                      <div class="row">
+                                          <div class="action">
+                                              <div class="col-sm-10">
+                                                <h1 class="title">RREF</h1>
+                                                <p>Structure of the first article of Terence Tao Dataset</p>
+                                              </div>
+                                              <div class="col-sm-2">
+                                                <button class="btn btn-primary btn-md" style="margin-top : 20px;" data-toggle="modal" data-target="#graph_animation">View Graph</button>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </section>
+                          <!--/#action-->
+
+
+
+                          <section id="rref-papers">
+                            <div class="root-ref">
+                              <div class="container-fluid">
+                                <div class="col-sm-12 title-bar">
+                                  {{data.dirStructure}}
+                                </div>
+                                <div class="container-fluid text-center">
+                                  <h2>{{data.title}}</h2>
+                                </div>
+                                <div class="row">
+                                  <div class="container-fluid">
+                                    <div class="col-sm-12">
+                                      <div class="col-sm-8 col-sm-offset-4 article-details">
+                                        <p><h3><b>Authors :</b> {{data.authors}}</h3></p>
+                                        <p><h3><b>ArticleId :</b> {{data.articleId}}</h3></p>
+                                        <p><h3><b>Publisher :</b> {{data.publisher}}</h3></p>
+                                        <p><h3><b>DOI :</b> {{data.doi}}</h3></p>
+                                      </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                      <h3>References</h3><hr>
+                                      <div class="owl-carousel owl-root owl-theme text-center">
+                                        {{#each data.referenced_articles}}
+                                          <div class="item-ref container-fluid ref-container" id="{{id}}">
+                                            <div class="ref-title"> {{articleId}}</div>
+                                            <div class="ref-text">{{title}}</div>
+                                          </div>
+                                        {{/each}}
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </section>
+
+                          <section id="rref-paper-references">
+
+                          </section>
+
+
+
+
+
+                          <div id="graph_animation" class="modal fade" role="dialog">
+                            <div class="modal-dialog modal-lg">
+
+                              <!-- Modal content-->
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                  <div id="mynetwork"></div>
+                                  <div id="preloader"><i class="fa fa-spinner fa-spin"></i></div>
+
+                                </div>
+                              </div>
+
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+
                 </div>
-              </div>
-              </div>
-              <br>
-              <div class="main">
-        <div class="row">
-        <div class="col-md-6">
-        <div id="my-graph1" ></div>
-</div>
-<div class="col-md-6">
-        <div id="my-graph2" class="graphsize">
+            </div>
         </div>
-</div>
-        </div>
-           <div class="row">
-        <div class="col-md-6">
-        <div id="my-graph3" class="graphsize"></div>
-</div>
-<div class="col-md-6">
-        <div id="my-graph4" class="graphsize">
-
-      </div>
-</div>
-        </div>
-</div>
-
-<div class="sub">
-        <div class="row">
-        <div class="col-md-6">
-        <div class="graph1"></div>
-</div>
-<div class="col-md-6">
-        <div class="graph2">
-        </div>
-</div>
-        </div>
-           <div class="row">
-        <div class="col-md-6">
-        <div class="graph3"></div>
-</div>
-<div class="col-md-6">
-        <div class="graph4">
-
-      </div>
-</div>
-        </div>
-</div>
-          </div>
-        </div>
-      </div>
     </div>
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body">
 
-  </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
 
-    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <script>
+        if (typeof module === 'object') {
+            window.module = module;
+            module = undefined;
+        }
+    </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
     <script src="javascripts/bootstrap.min.js"></script>
@@ -138,172 +402,345 @@
     </script>
 
     <script>
-    function showgraph(test){
-        id1 = 'graph-' + test + '1';
-        $(".graph1").attr('id', id1);
-        id2 = 'graph-' + test + '2';
-        $(".graph2").attr('id', id2);
-        id3 = 'graph-' + test + '3';
-        $(".graph3").attr('id', id3);
-        id4 = 'graph-' + test + '4';
-        $(".graph4").attr('id', id4);
-        $(".sub").show();
-        $(".main").hide();
-        path = "public/files/graphcsv/" + test + ".csv"
-        console.log(path)
-
-        name1 = 'graph-' + test + '1';
-        name2 = 'graph-' + test + '2';
-        name3 = 'graph-' + test + '3';
-        name4 = 'graph-' + test + '4';
-        Plotly.d3.csv(path, function(err, rows) {
-            trace00 = {
-                x: rows.map(function(row) { return row['Year'] }),
-                y: rows.map(function(row) { return row['ArticleCount'] }),
-                name: 'ArticleCount',
-                text: rows.map(function(row) { return row['Month'] }),
-                type: 'bar',
-                xaxis: 'x',
-                yaxis: 'y',
+        $('#my-graph1').on('click', function() {
+            var update = {
+                width: 1200, // or any new width
+                height: 700 // " "
             };
-            trace01 = {
-                x: rows.map(function(row) { return row['Year'] }),
-                y: rows.map(function(row) { return row['CitationCount'] }),
-                name: 'CitationCount',
-                text: rows.map(function(row) { return row['Month'] }),
-                type: 'bar',
+
+            Plotly.relayout('my-graph1', update);
+            $('#my-graph2').hide();
+            $('#my-graph3').hide();
+            $('#my-graph4').hide();
+        });
+
+        $('#my-graph2').on('click', function() {
+            var update = {
+                width: 1200, // or any new width
+                height: 700 // " "
             };
-            data0 = [trace00, trace01];
-            layout0 = {
-                autosize: true,
-                hovermode: 'closest',
-                title: "Article count vs Citation Count",
-                xaxis: {
-                    autorange: true,
-                    domain: [0, 1],
-                    range: [2004.5, 2016.5],
-                    type: 'linear'
-                },
-                yaxis: {
-                    autorange: true,
-                    domain: [0, 1],
-                    range: [0, 100],
-                    type: 'linear'
-                }
+            $('#my-graph2').animate({
+                'marginLeft': "-=600px" //moves left
+            });
+            Plotly.relayout('my-graph2', update);
+
+            $('#my-graph1').hide();
+            $('#my-graph3').hide();
+            $('#my-graph4').hide();
+        });
+        $('#my-graph3').on('click', function() {
+            var update = {
+                width: 1200, // or any new width
+                height: 700 // " "
             };
-            Plotly.plot(name1, {
-                data: data0,
-                layout: layout0,
+
+            Plotly.relayout('my-graph3', update);
+            $('#my-graph1').hide();
+            $('#my-graph2').hide();
+            $('#my-graph4').hide();
+        });
+        $('#my-graph4').on('click', function() {
+            var update = {
+                width: 1200, // or any new width
+                height: 700 // " "
+            };
+            $('#my-graph4').animate({
+                'marginLeft': "-=600px" //moves left
             });
+            Plotly.relayout('my-graph4', update);
+            $('#my-graph1').hide();
+            $('#my-graph2').hide();
+            $('#my-graph3').hide();
+        });
+        $('.graph1').on('click', function() {
+            var update = {
+                width: 1200, // or any new width
+                height: 700 // " "
+            };
 
-            Plotly.d3.csv(path, function(err, rows) {
-                var POP_TO_PX_SIZE = 2e10;
-                var trace1 = {
-                    mode: 'markers',
-                    type: 'bar',
-                    x: rows.map(function(row) { return row['Year'] }),
-                    y: rows.map(function(row) { return row['CitationCount'] }),
-                    text: rows.map(function(row) { return row['Name'] }),
-                };
-
-                layout1 = {
-                    autosize: true,
-                    hovermode: 'closest',
-                    legend: {
-                        x: 0.5,
-                        y: -0.25,
-                        orientation: "h",
-                        traceorder: "normal",
-                        xanchor: "center",
-                    },
-
-                    title: "Citation count vs Year",
-                    xaxis: {
-                        autorange: true,
-                        range: [2009.5, 2016.5],
-                        title: 'Year',
-                        type: 'linear'
-                    },
-                    yaxis: {
-                        autorange: true,
-                        range: [0, 4047.36842105],
-                        title: 'Citation Count',
-                        type: 'linear'
-                    }
-                };
-                Plotly.plot(name2, [trace1], layout1, { showLink: false });
-            });
-            Plotly.d3.csv(path, function(err, rows) {
-                var POP_TO_PX_SIZE = 2e10;
-                var trace2 = {
-                    mode: 'markers',
-                    type: 'bar',
-                    x: rows.map(function(row) { return row['Year'] }),
-                    y: rows.map(function(row) { return row['ArticleCount'] }),
-                    text: rows.map(function(row) { return row['Name'] }),
-                };
-
-                var layout2 = {
-                    autosize: true,
-                    hovermode: "closest",
-                    legend: {
-                        x: 0.5,
-                        y: -0.25,
-                        orientation: "h",
-                        traceorder: "normal",
-                        xanchor: "center"
-                    },
-
-                    title: "Article count vs Year",
-                    xaxis: {
-                        autorange: true,
-                        fixedrange: false,
-                        range: [1982.5, 2016.5],
-                        title: "Year",
-                        type: "linear"
-                    },
-                    yaxis: {
-                        autorange: true,
-                        range: [0, 33.6842105263],
-                        title: "Article Count",
-                        type: "linear"
-                    }
-                };
-                Plotly.plot(name3, [trace2], layout2, { showLink: false });
-            });
-            Plotly.d3.csv(path, function(err, rows) {
-                var POP_TO_PX_SIZE = 2e10;
-                var trace3 = {
-                    mode: 'markers',
-                    type: 'pie',
-                    direction: "counterclockwise",
-                    hoverinfo: "label+value+text+percent",
-                    sort: true,
-                    textinfo: "value+percent",
-                    labels: rows.map(function(row) { return row['Month'] }),
-                    values: rows.map(function(row) { return row['ArticleCount'] }),
-                    text: rows.map(function(row) { return row['Name'] }),
-                };
-
-                var layout3 = {
-                    autosize: true,
-                    hovermode: "closest",
-                    legend: {
-                        x: 1.00343949045,
-                        y: 0.910994764398
-                    },
-                    title: "Article Count per month"
-                };
-                Plotly.plot(name4, [trace3], layout3, { showLink: false });
-            });
+            Plotly.relayout(this.id, update);
+            $('.graph2').hide();
+            $('.graph3').hide();
+            $('.graph4').hide();
+            $('#goback').show();
 
         });
-        Plotly.deleteTraces(name1, 0);
-        Plotly.deleteTraces(name1, 0);
-        Plotly.deleteTraces(name2, 0);
-        Plotly.deleteTraces(name3, 0);
-        Plotly.deleteTraces(name4, 0);
-    }
+        $('.graph2').on('click', function() {
+            var update = {
+                width: 1200, // or any new width
+                height: 700 // " "
+            };
+            Plotly.relayout(this.id, update);
+            $('.graph1').hide();
+            $('.graph3').hide();
+            $('.graph4').hide();
+            $('#goback').show();
+        });
+        $('.graph3').on('click', function() {
+            var update = {
+                width: 1200, // or any new width
+                height: 700 // " "
+            };
+
+            Plotly.relayout(this.id, update);
+            $('.graph1').hide();
+            $('.graph2').hide();
+            $('.graph4').hide();
+            $('#goback').show();
+        });
+        $('.graph4').on('click', function() {
+            var update = {
+                width: 1200, // or any new width
+                height: 700 // " "
+            };
+            Plotly.relayout(this.id, update);
+            $('.graph1').hide();
+            $('.graph2').hide();
+            $('.graph3').hide();
+            $('#goback').show();
+        });
+        $('#goback').on('click',function(){
+            var update = {
+                width: 600, // or any new width
+                height: 600 // " "
+            };
+            var graph1id=$(".graph1").attr('id');
+            var graph2id=$(".graph2").attr('id');
+            var graph3id=$(".graph3").attr('id');
+            var graph4id=$(".graph4").attr('id');
+            Plotly.relayout(graph1id, update);
+            Plotly.relayout(graph2id, update);
+            Plotly.relayout(graph3id, update);
+            Plotly.relayout(graph4id, update);
+            $('.graph1').show();
+            $('.graph2').show();
+            $('.graph3').show();
+            $('.graph4').show();
+            $('#goback').hide();
+        })
+    </script>
+    <script>
+    $('#search-query').on('click',function(){
+        $('.results').show();
+    })
+        function showgraph(test) {
+            $('.results').hide();
+            console.log('clicking')
+            var update = {
+                width: 600, // or any new width
+                height: 600 // " "
+            };
+            $('.graph1').show();
+            $('.graph2').show();
+            $('.graph3').show();
+            $('.graph4').show();
+
+            id1 = 'graph-' + test + '1';
+            $(".graph1").attr('id', id1);
+            id2 = 'graph-' + test + '2';
+            $(".graph2").attr('id', id2);
+            id3 = 'graph-' + test + '3';
+            $(".graph3").attr('id', id3);
+            id4 = 'graph-' + test + '4';
+            $(".graph4").attr('id', id4);
+            $(".sub").show();
+            $(".main").hide();
+            path = "public/files/graphcsv/" + test + ".csv"
+            console.log(path)
+            name1 = 'graph-' + test + '1';
+            name2 = 'graph-' + test + '2';
+            name3 = 'graph-' + test + '3';
+            name4 = 'graph-' + test + '4';
+
+            Plotly.d3.csv(path, function(err, rows) {
+                trace00 = {
+                    x: rows.map(function(row) {
+                        return row['Year']
+                    }),
+                    y: rows.map(function(row) {
+                        return row['ArticleCount']
+                    }),
+                    name: 'ArticleCount',
+                    text: rows.map(function(row) {
+                        return row['Month']
+                    }),
+                    type: 'bar',
+                    xaxis: 'x',
+                    yaxis: 'y',
+                };
+                trace01 = {
+                    x: rows.map(function(row) {
+                        return row['Year']
+                    }),
+                    y: rows.map(function(row) {
+                        return row['CitationCount']
+                    }),
+                    name: 'CitationCount',
+                    text: rows.map(function(row) {
+                        return row['Month']
+                    }),
+                    type: 'bar',
+                };
+                data0 = [trace00, trace01];
+                layout0 = {
+                    autosize: true,
+                    hovermode: 'closest',
+                    title: "Article count vs Citation Count",
+                    xaxis: {
+                        autorange: true,
+                        domain: [0, 1],
+                        range: [2004.5, 2016.5],
+                        type: 'linear'
+                    },
+                    yaxis: {
+                        autorange: true,
+                        domain: [0, 1],
+                        range: [0, 100],
+                        type: 'linear'
+                    }
+                };
+                Plotly.plot(name1, {
+                    data: data0,
+                    layout: layout0,
+                });
+
+                Plotly.d3.csv(path, function(err, rows) {
+                    var POP_TO_PX_SIZE = 2e10;
+                    var trace1 = {
+                        mode: 'markers',
+                        type: 'bar',
+                        x: rows.map(function(row) {
+                            return row['Year']
+                        }),
+                        y: rows.map(function(row) {
+                            return row['CitationCount']
+                        }),
+                        text: rows.map(function(row) {
+                            return row['Name']
+                        }),
+                    };
+
+                    layout1 = {
+                        autosize: true,
+                        hovermode: 'closest',
+                        legend: {
+                            x: 0.5,
+                            y: -0.25,
+                            orientation: "h",
+                            traceorder: "normal",
+                            xanchor: "center",
+                        },
+
+                        title: "Citation count vs Year",
+                        xaxis: {
+                            autorange: true,
+                            range: [2009.5, 2016.5],
+                            title: 'Year',
+                            type: 'linear'
+                        },
+                        yaxis: {
+                            autorange: true,
+                            range: [0, 4047.36842105],
+                            title: 'Citation Count',
+                            type: 'linear'
+                        }
+                    };
+                    Plotly.plot(name2, [trace1], layout1, {
+                        showLink: false
+                    });
+                });
+                Plotly.d3.csv(path, function(err, rows) {
+                    var POP_TO_PX_SIZE = 2e10;
+                    var trace2 = {
+                        mode: 'markers',
+                        type: 'bar',
+                        x: rows.map(function(row) {
+                            return row['Year']
+                        }),
+                        y: rows.map(function(row) {
+                            return row['ArticleCount']
+                        }),
+                        text: rows.map(function(row) {
+                            return row['Name']
+                        }),
+                    };
+
+                    var layout2 = {
+                        autosize: true,
+                        hovermode: "closest",
+                        legend: {
+                            x: 0.5,
+                            y: -0.25,
+                            orientation: "h",
+                            traceorder: "normal",
+                            xanchor: "center"
+                        },
+
+                        title: "Article count vs Year",
+                        xaxis: {
+                            autorange: true,
+                            fixedrange: false,
+                            range: [1982.5, 2016.5],
+                            title: "Year",
+                            type: "linear"
+                        },
+                        yaxis: {
+                            autorange: true,
+                            range: [0, 33.6842105263],
+                            title: "Article Count",
+                            type: "linear"
+                        }
+                    };
+                    Plotly.plot(name3, [trace2], layout2, {
+                        showLink: false
+                    });
+                });
+                Plotly.d3.csv(path, function(err, rows) {
+                    var POP_TO_PX_SIZE = 2e10;
+                    var trace3 = {
+                        mode: 'markers',
+                        type: 'pie',
+                        direction: "counterclockwise",
+                        hoverinfo: "label+value+text+percent",
+                        sort: true,
+                        textinfo: "value+percent",
+                        labels: rows.map(function(row) {
+                            return row['Month']
+                        }),
+                        values: rows.map(function(row) {
+                            return row['ArticleCount']
+                        }),
+                        text: rows.map(function(row) {
+                            return row['Name']
+                        }),
+                    };
+
+                    var layout3 = {
+                        autosize: true,
+                        hovermode: "closest",
+                        legend: {
+                            x: 1.00343949045,
+                            y: 0.910994764398
+                        },
+                        title: "Article Count per month"
+                    };
+                    Plotly.plot(name4, [trace3], layout3, {
+                        showLink: false
+                    });
+                });
+
+            });
+            Plotly.relayout(name1, update);
+            Plotly.relayout(name2, update);
+            Plotly.relayout(name3, update);
+            Plotly.relayout(name4, update);
+            Plotly.deleteTraces(name1, 0);
+            Plotly.deleteTraces(name1, 0);
+            Plotly.deleteTraces(name2, 0);
+            Plotly.deleteTraces(name3, 0);
+            Plotly.deleteTraces(name4, 0);
+
+        }
 
     </script>
     <!-- <script>
@@ -319,98 +756,163 @@ $('#my-graph1').on('click', function() {
 
 });</script> -->
     <script>
-    $(document).ready(function() {
-    var express = require('express');
-    var router = express.Router();
-    var request = require("request");
-    var fs = require("fs");
-    var path = require("path");
-    var util = require("./util");
-    var hbs = require('hbs');
-    var mongoose = require("mongoose");
-    var svgCaptcha = require("svg-captcha");
-    var crypto = require("crypto");
-    var reqq = require("sync-request")
-    var Datastore = require('nedb')
-  , db = new Datastore({ filename: './mydatabase.db' });
-  searchdb = new Datastore({ filename: './search.db' });
-db.loadDatabase(function (err) {    // Callback is optional
-  // Now commands will be executed
-});
-searchdb.loadDatabase(function (err) {    // Callback is optional
-  // Now commands will be executed
-});
-db.ensureIndex({ fieldName: 'name', unique: true }, function (err) {
-});
-searchdb.ensureIndex({ fieldName: 'query', unique: true }, function (err) {
-});
-searchdb.find({}, function (err, docs) {
-// docs contains Mars and Earth
-for(var i=0;i<docs.length;i++){
-    console.log(docs[i])
-var html='<a>'+docs[i]['query']+'</a>'+'<br>'
-$('.searches').append(html)
-}
-});
-function search(test){
-    $('.results').html("")
-    db.find({ name: new RegExp(test,'i') }, function (err, docs) {
-// docs contains Mars and Earth
-for(var i=0;i<docs.length;i++){
-var html='<a onclick="showgraph(\''+docs[i]['name']+'\')">'+docs[i]['name']+'</a>'+'<br>'
-$('.results').append(html)
-}
-});
-}
-var data =[];
-util.generateJournalList(function(journals) {
-    console.log(journals)
+        $(document).ready(function() {
+            var express = require('express');
+            var router = express.Router();
+            var request = require("request");
+            var fs = require("fs");
+            var path = require("path");
+            var util = require("./util");
+            var hbs = require('hbs');
+            var mongoose = require("mongoose");
+            var svgCaptcha = require("svg-captcha");
+            var crypto = require("crypto");
+            var reqq = require("sync-request")
+            var Datastore = require('nedb'),
+                db = new Datastore({
+                    filename: './mydatabase.db'
+                });
+            searchdb = new Datastore({
+                filename: './search.db'
+            });
+            var firstNode = {
+                id : "G",
+                label : "5452187",
+                color:{
+                    border : "#a80008",
+                    background:"#a80008",
+                    highlight : "#a80008"
+                },
+                title : "The Power of Convex Relaxation: Near-Optimal Matrix Completion"
+            };
+            var edgePair = {};
+            var graph = {};
+            graph.nodes = firstNode;
+            graph.edges = edgePair;
 
-                    console.log(journals.length)
-                    for(var i=0;i<journals.length;i++){
-                        var exists = true;
-                        var doc = { name: journals[i]
-               };
-                        db.insert({name:journals[i]}, function (err, newDoc) {   // Callback is optional
-                          // newDoc is the newly inserted document, including its _id
-                          // newDoc has no key called notToBeSaved since its value was undefined
-                        });
+
+            var firstArticle ={};
+            fs.readFile('public/files/TerenceTaoFirstArticle/0.json', {encoding:"utf8"}, (err, data)=>{
+                if(err) throw err;
+                var obj = JSON.parse(data);
+                firstArticle["title"] = obj.title;
+                firstArticle["articleId"] = obj.articleId;
+                firstArticle["publisher"] = obj.publisher;
+                firstArticle["doi"] = obj.doi;
+                firstArticle["dirStructure"] = obj.dirStructure;
+                firstArticle["authors"] = obj.authors;
+
+                var ch = [];
+                for(var i=0; i<obj.referenced_articles.length; i++){
+                    item = {};
+                    item["title"] = obj.referenced_articles[i].title;
+                    item["articleId"] = obj.referenced_articles[i].articleId;
+                    item["id"] = "0-"+i;
+                    ch.push(item);
+                }
+                firstArticle["referenced_articles"] = ch;
+
+
+            });
+            db.loadDatabase(function(err) { // Callback is optional
+                // Now commands will be executed
+            });
+            searchdb.loadDatabase(function(err) { // Callback is optional
+                // Now commands will be executed
+            });
+            db.ensureIndex({
+                fieldName: 'name',
+                unique: true
+            }, function(err) {});
+            searchdb.ensureIndex({
+                fieldName: 'query',
+                unique: true
+            }, function(err) {});
+            searchdb.find({}, function(err, docs) {
+                // docs contains Mars and Earth
+                for (var i = 0; i < docs.length; i++) {
+                    console.log(docs[i])
+                    var html = '<li class="list-group-item"><div class="media-body">' + docs[i]['query'] + '</div></li>'
+                    $('.searches').append(html)
+                }
+            });
+
+            function search(test) {
+                $('.results').html("")
+                db.find({
+                    name: new RegExp(test, 'i')
+                }, function(err, docs) {
+                    // docs contains Mars and Earth
+                    for (var i = 0; i < docs.length; i++) {
+                        var html = '<li><a onclick="showgraph(\'' + docs[i]['name'] + '\')">' + docs[i]['name'] + '</a></li>'
+                        $('.results').append(html)
                     }
+                });
+            }
+            var x_timer;
+            $("#search-query").keyup(function(e) {
+                clearTimeout(x_timer);
+                var query = $(this).val();
+                x_timer = setTimeout(function() {
+                    console.log("Checking")
+                    search(query);
+                }, 1000);
+            });
+            var data = [];
+            util.generateJournalList(function(journals) {
+                console.log(journals)
+
+                console.log(journals.length)
+                for (var i = 0; i < journals.length; i++) {
+                    var exists = true;
+                    var doc = {
+                        name: journals[i]
+                    };
+                    db.insert({
+                        name: journals[i]
+                    }, function(err, newDoc) { // Callback is optional
+                        // newDoc is the newly inserted document, including its _id
+                        // newDoc has no key called notToBeSaved since its value was undefined
+                    });
+                }
 
 
 
 
-               });
+            });
 
-               $("#quicksearch").on('click',function(){
-                   $('.results').html("")
-                   query = $('#search-query').val()
-                   searchdb.insert({query:query}, function (err, newDoc) {   // Callback is optional
-                     // newDoc is the newly inserted document, including its _id
-                     // newDoc has no key called notToBeSaved since its value was undefined
-                   });
-                   db.find({ name: new RegExp(query,'i') }, function (err, docs) {
-   // docs contains Mars and Earth
-   for(var i=0;i<docs.length;i++){
-    var html='<a onclick="showgraph(\''+docs[i]['name']+'\')">'+docs[i]['name']+'</a>'+'<br>'
-    $('.results').append(html)
-   }
- });
-               });
+            $("#quicksearch").on('click', function() {
+                $('.results').html("")
+                query = $('#search-query').val()
+                searchdb.insert({
+                    query: query
+                }, function(err, newDoc) { // Callback is optional
+                    // newDoc is the newly inserted document, including its _id
+                    // newDoc has no key called notToBeSaved since its value was undefined
+                });
+                db.find({
+                    name: new RegExp(query, 'i')
+                }, function(err, docs) {
+                    // docs contains Mars and Earth
+                    for (var i = 0; i < docs.length; i++) {
+                        var html = '<a onclick="showgraph(\'' + docs[i]['name'] + '\')">' + docs[i]['name'] + '</a>' + '<br>'
+                        $('.results').append(html)
+                    }
+                });
+            });
 
 
-})
+        })
 
-            // util.generateJournalList(function(journals) {
-            //         util.generateAllArticleCitvsYearCsv();
-            //         for (k = 0; k < journals.length; k++) {
-            //             util.generateArticleCitvsYearCsv(journals[k]);
-            //         }
-            //         util.writetoCSV();
-            //
-            //     })
-
-  </script>
+        // util.generateJournalList(function(journals) {
+        //         util.generateAllArticleCitvsYearCsv();
+        //         for (k = 0; k < journals.length; k++) {
+        //             util.generateArticleCitvsYearCsv(journals[k]);
+        //         }
+        //         util.writetoCSV();
+        //
+        //     })
+    </script>
 
 
 </body>
