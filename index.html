@@ -10,6 +10,9 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
     <link rel="stylesheet" href="stylesheets/flat-ui.css">
     <link rel="stylesheet" href="stylesheets/photon.css">
+    <link rel="stylesheet" href="/stylesheets/owl.carousel.min.css">
+    <link rel="stylesheet" href="/stylesheets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.19.1/vis.min.css">
 <!--     <link rel="stylesheet" href="/stylesheets/owl.carousel.min.css">
     <link rel="stylesheet" href="/stylesheets/owl.theme.default.min.css"> -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.19.1/vis.min.css"> -->
@@ -216,6 +219,7 @@ input {
         <div class="window-content">
             <div class="pane-group">
 
+
                 <div class="pane-sm sidebar">
                     <ul class="list-group searches text-center">
       <li class="list-group-header text-center">
@@ -295,28 +299,14 @@ input {
                           </div>
                       </div>
                       <div id="menu1" class="tab-pane fade">
-                          <section id="page-breadcrumb">
-                              <div class="vertical-center sun">
-                                   <div class="container">
-                                      <div class="row">
-                                          <div class="action">
-                                              <div class="col-sm-12">
-                                                <h1>RREF</h1>
-                                                <p>Structure of the first article of Terence Tao Dataset</p>
-                                              </div>
-                                              <div class="col-sm-12">
-                                                <div id="mynetwork"></div>
-                                                <!-- <div id="preloader"><i class="fa fa-spinner fa-spin"></i></div> -->
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
+                          <div class="action">
+                              <div class="col-md-12 text-center">
+                                <h1>RREF</h1>
+                                <p>Structure of the first article of Terence Tao Dataset</p>
                               </div>
-                          </section>
+                              <div id="mynetwork"></div>
+                          </div>
                           <!--/#action-->
-                      </div>
-
-
                     </div>
 
                 </div>
@@ -904,7 +894,6 @@ $('#my-graph1').on('click', function() {
             var graph = {};
             graph.nodes = firstNode;
             graph.edges = edgePair;
-
 
             var firstArticle ={};
             fs.readFile('public/files/TerenceTaoFirstArticle/0.json', {encoding:"utf8"}, (err, data)=>{
