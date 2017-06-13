@@ -13,6 +13,11 @@
     <link rel="stylesheet" href="/stylesheets/owl.carousel.min.css">
     <link rel="stylesheet" href="/stylesheets/owl.theme.default.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.19.1/vis.min.css">
+<!--     <link rel="stylesheet" href="/stylesheets/owl.carousel.min.css">
+    <link rel="stylesheet" href="/stylesheets/owl.theme.default.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.19.1/vis.min.css"> -->
+    <link rel="stylesheet" href="stylesheets/vis.min.css">
+
     <style>
     a {
     color: #1e7ad3;
@@ -214,6 +219,7 @@ input {
         <div class="window-content">
             <div class="pane-group">
 
+
                 <div class="pane-sm sidebar">
                     <ul class="list-group searches text-center">
       <li class="list-group-header text-center">
@@ -293,89 +299,14 @@ input {
                           </div>
                       </div>
                       <div id="menu1" class="tab-pane fade">
-                          <section id="page-breadcrumb">
-                              <div class="vertical-center sun">
-                                   <div class="container">
-                                      <div class="row">
-                                          <div class="action">
-                                              <div class="col-sm-10">
-                                                <h1 class="title">RREF</h1>
-                                                <p>Structure of the first article of Terence Tao Dataset</p>
-                                              </div>
-                                              <div class="col-sm-2">
-                                                <button class="btn btn-primary btn-md" style="margin-top : 20px;" data-toggle="modal" data-target="#graph_animation">View Graph</button>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
+                          <div class="action">
+                              <div class="col-md-12 text-center">
+                                <h1>RREF</h1>
+                                <p>Structure of the first article of Terence Tao Dataset</p>
                               </div>
-                          </section>
-                          <!--/#action-->
-
-
-
-                          <section id="rref-papers">
-                            <div class="root-ref">
-                              <div class="container-fluid">
-                                <div class="col-sm-12 title-bar">
-                                  {{data.dirStructure}}
-                                </div>
-                                <div class="container-fluid text-center">
-                                  <h2>{{data.title}}</h2>
-                                </div>
-                                <div class="row">
-                                  <div class="container-fluid">
-                                    <div class="col-sm-12">
-                                      <div class="col-sm-8 col-sm-offset-4 article-details">
-                                        <p><h3><b>Authors :</b> {{data.authors}}</h3></p>
-                                        <p><h3><b>ArticleId :</b> {{data.articleId}}</h3></p>
-                                        <p><h3><b>Publisher :</b> {{data.publisher}}</h3></p>
-                                        <p><h3><b>DOI :</b> {{data.doi}}</h3></p>
-                                      </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                      <h3>References</h3><hr>
-                                      <div class="owl-carousel owl-root owl-theme text-center">
-                                        {{#each data.referenced_articles}}
-                                          <div class="item-ref container-fluid ref-container" id="{{id}}">
-                                            <div class="ref-title"> {{articleId}}</div>
-                                            <div class="ref-text">{{title}}</div>
-                                          </div>
-                                        {{/each}}
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </section>
-
-                          <section id="rref-paper-references">
-
-                          </section>
-
-
-
-
-
-                          <div id="graph_animation" class="modal fade" role="dialog">
-                            <div class="modal-dialog modal-lg">
-
-                              <!-- Modal content-->
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>
-                                <div class="modal-body">
-                                  <div id="mynetwork"></div>
-                                  <div id="preloader"><i class="fa fa-spinner fa-spin"></i></div>
-
-                                </div>
-                              </div>
-
-                            </div>
+                              <div id="mynetwork"></div>
                           </div>
-                      </div>
+                          <!--/#action-->
                     </div>
 
                 </div>
@@ -397,6 +328,180 @@ input {
     <script src="javascripts/flat-ui.js"></script>
     <script src="./csvgraphs.js"></script>
     <script src="./papaparse.js"></script>
+    <script src="./javascripts/vis.min.js"></script>
+
+    <!-- RREF BEGINS -->
+    <script>
+
+      var fs = require("fs");
+      var graph_request = function(id){
+        alert("Here");
+        var colors = ["#266348","#6242f4","#00a838","#1c2820","#a80008"];
+        var actualId = id.replace('G', '0');
+        var hierarchy = id.split("-");
+        fs.readFile('TerenceTaoFirstArticle/'+actualId+'.json', {encoding:"utf8"}, (err, data)=>{
+          if(err){
+              console.log("invalid ID");
+              alert(err);
+              return;
+          }
+          var obj = JSON.parse(data);
+          var l = hierarchy.length;
+          var nodes = [];
+          var edgePairs = [];
+          for(var i=0; obj.referenced_articles && i<obj.referenced_articles.length; i++){
+              item = {};
+              item["label"] = obj.referenced_articles[i].articleId;
+              item["id"] = id+"-"+i;
+              item["color"]={
+                  border : colors[l],
+                  background : colors[l],
+                  highlight : colors[l]
+              };
+              item["title"] = obj.referenced_articles[i].title;
+
+              edgePairItem = {};
+              edgePairItem.from = id;
+              edgePairItem.to = item["id"];
+              nodes.push(item);
+              edgePairs.push(edgePairItem);
+          }
+          var graph = {};
+          graph.nodes = nodes;
+          graph.edges = edgePairs;
+          alert(JSON.stringify(graph));
+          return graph;
+        });
+      }
+
+      var firstNode = {
+        id : "G",
+        label : "5452187",
+        color:{
+            border : "#a80008",
+            background:"#a80008",
+            highlight : "#a80008"
+        },
+        title : "The Power of Convex Relaxation: Near-Optimal Matrix Completion"
+      };
+      var edgePair = {};
+      var graph = {};
+      graph.nodes = firstNode;
+      graph.edges = edgePair;
+
+      var nodes = new vis.DataSet();
+      var graphInitNodes = graph.nodes;
+      nodes.add(graphInitNodes);
+
+      // create an array with edges
+      var edges = new vis.DataSet([
+
+      ]);
+
+      // create a network
+      var container = document.getElementById('mynetwork');
+
+      // provide the data in the vis format
+      var data = {
+          nodes: nodes,
+          edges: edges
+      };
+      var options = {
+        nodes:{
+          shape : "circle",
+          borderWidth: 1,
+          borderWidthSelected: 2,
+          brokenImage:undefined,
+          chosen: true,
+          font: {
+            color: '#fff',
+          }
+      }
+      };
+
+      // initialize your network!
+      var network = new vis.Network(container, data, options);
+
+
+      $(document).ready(function(){
+        network.once('initRedraw', function() {
+        network.moveTo({
+          scale : 1.0,
+          offset : {x: 400, y:300},
+          animation : true
+        });
+        // console.log(network.getViewPosition());
+        });
+        $("#preloader").css("display", "none");
+
+         $("#graph_animation").on('hidden.bs.modal', function () {
+                  nodes.clear();
+                  edges.clear();
+                  nodes.add(graphInitNodes);
+          });
+
+        $('[data-toggle="tooltip"]').tooltip();
+
+
+        network.on("click", function(args){
+          if(args.nodes.length){
+            // console.log(args.nodes);
+            // alert("Clicked");
+            console.log("GRAPH EMMITTED");
+            $("#preloader").css("display", "block");
+            // var g = graph_request(args.nodes[0]);
+
+            var id = args.nodes[0];
+
+
+            // alert("Here");
+            var colors = ["#266348","#6242f4","#00a838","#1c2820","#a80008"];
+            var actualId = id.replace('G', '0');
+            var hierarchy = id.split("-");
+            fs.readFile('TerenceTaoFirstArticle/'+actualId+'.json', {encoding:"utf8"}, (err, data)=>{
+              if(err){
+                  console.log("invalid ID");
+                  alert(err);
+                  return;
+              }
+              var obj = JSON.parse(data);
+              var l = hierarchy.length;
+              var extraNodes = [];
+              var edgePairs = [];
+              for(var i=0; obj.referenced_articles && i<obj.referenced_articles.length; i++){
+                  item = {};
+                  item["label"] = obj.referenced_articles[i].articleId;
+                  item["id"] = id+"-"+i;
+                  item["color"]={
+                      border : colors[l],
+                      background : colors[l],
+                      highlight : colors[l]
+                  };
+                  item["title"] = obj.referenced_articles[i].title;
+
+                  edgePairItem = {};
+                  edgePairItem.from = id;
+                  edgePairItem.to = item["id"];
+                  extraNodes.push(item);
+                  edgePairs.push(edgePairItem);
+              }
+              var graph = {};
+              graph.nodes = extraNodes;
+              graph.edges = edgePairs;
+              // alert(JSON.stringify(graph));
+              nodes.add(graph.nodes);
+              edges.add(graph.edges);
+              $("#preloader").css("display", "none");
+
+            });
+          }
+        });
+      });
+    </script>
+
+    <!-- RREF ENDS -->
+
+
     <script>
         if (window.module) module = window.module;
     </script>
@@ -789,7 +894,6 @@ $('#my-graph1').on('click', function() {
             var graph = {};
             graph.nodes = firstNode;
             graph.edges = edgePair;
-
 
             var firstArticle ={};
             fs.readFile('public/files/TerenceTaoFirstArticle/0.json', {encoding:"utf8"}, (err, data)=>{
