@@ -5,232 +5,27 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home | SciBase</title>
-    <link rel="stylesheet" type="text/css" href="stylesheets/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="stylesheets/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
-    <link rel="stylesheet" href="stylesheets/flat-ui.css">
-    <link rel="stylesheet" href="stylesheets/photon.css">
-    <link rel="stylesheet" href="/stylesheets/owl.carousel.min.css">
-    <link rel="stylesheet" href="/stylesheets/owl.theme.default.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.19.1/vis.min.css">
-<!--     <link rel="stylesheet" href="/stylesheets/owl.carousel.min.css">
-    <link rel="stylesheet" href="/stylesheets/owl.theme.default.min.css"> -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.19.1/vis.min.css"> -->
-    <link rel="stylesheet" href="stylesheets/vis.min.css">
-
-    <style>
-    a {
-    color: #1e7ad3;
-    text-decoration: none;
-}
-#mynetwork {
-    width: 100%;
-    height: 100vh;
-}
-#preloader{
-    position: absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100vh;
-    display : block;
-    background-color: rgba(255, 255, 255, 0.5);
-}
-#preloader > i{
-    position: absolute;
-    top : 0;
-    left : 48%;
-    font-size : 50px;
-}
-.ref-selected{
-  background-color : rgb(198, 239, 255);
-}
-a:hover { text-decoration: underline }
-
-.container, .main {
-    width: 640px;
-    margin-left: auto;
-    margin-right: auto;
-    height: 300px;
-}
-
-.main { margin-top: 50px }
-
-input {
-    font-family: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 13px;
-    color: #555860;
-}
-
-.search {
-    position: relative;
-    margin: 0 auto;
-    width: 300px;
-}
-
-.search input {
-    height: 26px;
-    width: 100%;
-    padding: 0 12px 0 25px;
-    background: white url("http://cssdeck.com/uploads/media/items/5/5JuDgOa.png") 8px 6px no-repeat;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #a8acbc #babdcc #c0c3d2;
-    border-radius: 13px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -ms-box-sizing: border-box;
-    -o-box-sizing: border-box;
-    box-sizing: border-box;
-    -webkit-box-shadow: inset 0 1px #e5e7ed, 0 1px 0 #fcfcfc;
-    -moz-box-shadow: inset 0 1px #e5e7ed, 0 1px 0 #fcfcfc;
-    -ms-box-shadow: inset 0 1px #e5e7ed, 0 1px 0 #fcfcfc;
-    -o-box-shadow: inset 0 1px #e5e7ed, 0 1px 0 #fcfcfc;
-    box-shadow: inset 0 1px #e5e7ed, 0 1px 0 #fcfcfc;
-}
-
-.search input:focus {
-    outline: none;
-    border-color: #66b1ee;
-    -webkit-box-shadow: 0 0 2px rgba(85, 168, 236, 0.9);
-    -moz-box-shadow: 0 0 2px rgba(85, 168, 236, 0.9);
-    -ms-box-shadow: 0 0 2px rgba(85, 168, 236, 0.9);
-    -o-box-shadow: 0 0 2px rgba(85, 168, 236, 0.9);
-    box-shadow: 0 0 2px rgba(85, 168, 236, 0.9);
-}
-
-.search input:focus + .results { display: block }
-
-.search .results {
-    position: absolute;
-    top: 35px;
-    left: 0;
-    right: 0;
-    z-index: 10;
-    padding: 0;
-    margin: 0;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #cbcfe2 #c8cee7 #c4c7d7;
-    border-radius: 3px;
-    background-color: #fdfdfd;
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fdfdfd), color-stop(100%, #eceef4));
-    background-image: -webkit-linear-gradient(top, #fdfdfd, #eceef4);
-    background-image: -moz-linear-gradient(top, #fdfdfd, #eceef4);
-    background-image: -ms-linear-gradient(top, #fdfdfd, #eceef4);
-    background-image: -o-linear-gradient(top, #fdfdfd, #eceef4);
-    background-image: linear-gradient(top, #fdfdfd, #eceef4);
-    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    -ms-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    -o-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-.search .results li { display: block }
-
-.search .results li:first-child { margin-top: -1px }
-
-.search .results li:first-child:before, .search .results li:first-child:after {
-    display: block;
-    content: '';
-    width: 0;
-    height: 0;
-    position: absolute;
-    left: 50%;
-    margin-left: -5px;
-    border: 5px outset transparent;
-}
-
-.search .results li:first-child:before {
-    border-bottom: 5px solid #c4c7d7;
-    top: -11px;
-}
-
-.search .results li:first-child:after {
-    border-bottom: 5px solid #fdfdfd;
-    top: -10px;
-}
-
-.search .results li:first-child:hover:before, .search .results li:first-child:hover:after { display: none }
-
-.search .results li:last-child { margin-bottom: -1px }
-
-.search .results a {
-    display: block;
-    position: relative;
-    margin: 0 -1px;
-    padding: 6px 40px 6px 10px;
-    color: #808394;
-    font-weight: 500;
-    text-shadow: 0 1px #fff;
-    border: 1px solid transparent;
-    border-radius: 3px;
-}
-
-.search .results a span { font-weight: 200 }
-
-.search .results a:before {
-    content: '';
-    width: 18px;
-    height: 18px;
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    margin-top: -9px;
-    background: url("http://cssdeck.com/uploads/media/items/7/7BNkBjd.png") 0 0 no-repeat;
-}
-.navbar {
-    margin-bottom: 0;
-    border-radius: 0px;
-}
-.search .results a:hover {
-    text-decoration: none;
-    color: #fff;
-    text-shadow: 0 -1px rgba(0, 0, 0, 0.3);
-    border-color: #2380dd #2179d5 #1a60aa;
-    background-color: #338cdf;
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #59aaf4), color-stop(100%, #338cdf));
-    background-image: -webkit-linear-gradient(top, #59aaf4, #338cdf);
-    background-image: -moz-linear-gradient(top, #59aaf4, #338cdf);
-    background-image: -ms-linear-gradient(top, #59aaf4, #338cdf);
-    background-image: -o-linear-gradient(top, #59aaf4, #338cdf);
-    background-image: linear-gradient(top, #59aaf4, #338cdf);
-    -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.2), 0 1px rgba(0, 0, 0, 0.08);
-    -moz-box-shadow: inset 0 1px rgba(255, 255, 255, 0.2), 0 1px rgba(0, 0, 0, 0.08);
-    -ms-box-shadow: inset 0 1px rgba(255, 255, 255, 0.2), 0 1px rgba(0, 0, 0, 0.08);
-    -o-box-shadow: inset 0 1px rgba(255, 255, 255, 0.2), 0 1px rgba(0, 0, 0, 0.08);
-    box-shadow: inset 0 1px rgba(255, 255, 255, 0.2), 0 1px rgba(0, 0, 0, 0.08);
-}
-
-:-moz-placeholder {
-    color: #a7aabc;
-    font-weight: 200;
-}
-
-::-webkit-input-placeholder {
-    color: #a7aabc;
-    font-weight: 200;
-}</style>
+    <link rel="stylesheet" type="text/css" href="public/stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="public/stylesheets/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="public/stylesheets/style.css">
+    <link rel="stylesheet" href="public/stylesheets/flat-ui.css">
+    <link rel="stylesheet" href="public/stylesheets/photon.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.19.1/vis.min.css">s
 </head>
 
 <body>
     <div class="window">
         <div class="window-content">
             <div class="pane-group">
-
-
                 <div class="pane-sm sidebar">
                     <ul class="list-group searches text-center">
-      <li class="list-group-header text-center">
-        <h4>Recent Queries</h4>
-      </li>
-    </ul>
-
+                        <li class="list-group-header text-center">
+                            <h4>Recent Queries</h4>
+                        </li>
+                    </ul>
                 </div>
-
                 <div class="pane">
-                    <nav class="navbar navbar-default" role="navigation">
+                    <nav class="navbar navbar-default" role="navigation" style="margin-bottom:0px;">
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
       <span class="sr-only">Toggle navigation</span>
@@ -244,624 +39,81 @@ input {
                     </nav>
                     <!-- /navbar -->
                     <ul class="nav nav-tabs nav-justified">
-                      <li class="active "><a data-toggle="tab" href="#home">Graphs</a></li>
-                      <li><a data-toggle="tab" href="#menu1">RREF</a></li>
+                        <li class="active "><a data-toggle="tab" href="#home">Graphs</a></li>
+                        <li><a data-toggle="tab" href="#menu1">RREF</a></li>
                     </ul>
-
                     <div class="tab-content">
-                      <div id="home" class="tab-pane fade in active">
-                          <div class="row">
+                        <div id="home" class="tab-pane fade in active">
+                            <div class="row">
+                                <div class="col-md-6 col-md-offset-3  text-center">
+                                    <div>
+                                        <h2 class="post-title center">View charts for any journal</h2>
+                                        <br>
+                                        <div class="search" method="post">
+                                            <input type="text" name="q" placeholder="Search" id="search-query" class="" />
+                                            <ul class="results">
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="sub">
+                                <a class="btn btn-primary" id="goback">Back</a>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="graph1"></div>
 
-                              <div class="col-md-6 col-md-offset-3  text-center">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="graph2">
+                                        </div>
 
-                                  <!--<a href="/login" class="btn btn-common">Login</a>
-                      <a href="/register" class="btn btn-common">Register</a>-->
-                                  <div>
-                                      <h2 class="post-title center">View charts for any journal</h2>
-                                      <br>
-             <div class="search" method="post">
-                 <input type="text" name="q" placeholder="Search..." id="search-query" class=""/>
-                 <ul class="results" >
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="graph3"></div>
 
-                 </ul>
-             </div>
-                                  </div>
-                              </div>
-                          </div>
-                          <br>
-
-
-                          <div class="sub">
-                              <a  class="btn btn-primary" id="goback">Back</a>
-                              <div class="row">
-                                  <div class="col-md-6">
-                                      <div class="graph1"></div>
-
-                                  </div>
-                                  <div class="col-md-6">
-                                      <div class="graph2">
-                                      </div>
-
-                                  </div>
-                              </div>
-                              <div class="row">
-                                  <div class="col-md-6">
-                                      <div class="graph3"></div>
-
-                                  </div>
-                                  <div class="col-md-6">
-                                      <div class="graph4">
-
-                                      </div>
-
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <div id="menu1" class="tab-pane fade">
-                          <div class="action">
-                              <div class="col-md-12 text-center">
-                                <h1>RREF</h1>
-                                <p>Structure of the first article of Terence Tao Dataset</p>
-                              </div>
-                              <div id="mynetwork"></div>
-                          </div>
-                          <!--/#action-->
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="graph4">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="menu1" class="tab-pane fade">
+                            <div class="action">
+                                <div class="col-md-12 text-center">
+                                    <h1>RREF</h1>
+                                    <p>Structure of the first article of Terence Tao Dataset</p>
+                                </div>
+                                <div id="mynetwork"></div>
+                            </div>
+                        </div>
                     </div>
-
                 </div>
             </div>
         </div>
-    </div>
+        <script>
+            if (typeof module === 'object') {
+                window.module = module;
+                module = undefined;
+            }
+        </script>
 
-
-    <script>
-        if (typeof module === 'object') {
-            window.module = module;
-            module = undefined;
-        }
-    </script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-    <script src="javascripts/bootstrap.min.js"></script>
-    <script src="./plotly-latest.min.js"></script>
-    <script src="javascripts/flat-ui.js"></script>
-    <script src="./csvgraphs.js"></script>
-    <script src="./papaparse.js"></script>
-    <script src="./javascripts/vis.min.js"></script>
-
-    <!-- RREF BEGINS -->
-    <script>
-
-      var fs = require("fs");
-      var graph_request = function(id){
-        alert("Here");
-        var colors = ["#266348","#6242f4","#00a838","#1c2820","#a80008"];
-        var actualId = id.replace('G', '0');
-        var hierarchy = id.split("-");
-        fs.readFile('TerenceTaoFirstArticle/'+actualId+'.json', {encoding:"utf8"}, (err, data)=>{
-          if(err){
-              console.log("invalid ID");
-              alert(err);
-              return;
-          }
-          var obj = JSON.parse(data);
-          var l = hierarchy.length;
-          var nodes = [];
-          var edgePairs = [];
-          for(var i=0; obj.referenced_articles && i<obj.referenced_articles.length; i++){
-              item = {};
-              item["label"] = obj.referenced_articles[i].articleId;
-              item["id"] = id+"-"+i;
-              item["color"]={
-                  border : colors[l],
-                  background : colors[l],
-                  highlight : colors[l]
-              };
-              item["title"] = obj.referenced_articles[i].title;
-
-              edgePairItem = {};
-              edgePairItem.from = id;
-              edgePairItem.to = item["id"];
-              nodes.push(item);
-              edgePairs.push(edgePairItem);
-          }
-          var graph = {};
-          graph.nodes = nodes;
-          graph.edges = edgePairs;
-          alert(JSON.stringify(graph));
-          return graph;
-        });
-      }
-
-      var firstNode = {
-        id : "G",
-        label : "5452187",
-        color:{
-            border : "#a80008",
-            background:"#a80008",
-            highlight : "#a80008"
-        },
-        title : "The Power of Convex Relaxation: Near-Optimal Matrix Completion"
-      };
-      var edgePair = {};
-      var graph = {};
-      graph.nodes = firstNode;
-      graph.edges = edgePair;
-
-      var nodes = new vis.DataSet();
-      var graphInitNodes = graph.nodes;
-      nodes.add(graphInitNodes);
-
-      // create an array with edges
-      var edges = new vis.DataSet([
-
-      ]);
-
-      // create a network
-      var container = document.getElementById('mynetwork');
-
-      // provide the data in the vis format
-      var data = {
-          nodes: nodes,
-          edges: edges
-      };
-      var options = {
-        nodes:{
-          shape : "circle",
-          borderWidth: 1,
-          borderWidthSelected: 2,
-          brokenImage:undefined,
-          chosen: true,
-          font: {
-            color: '#fff',
-          }
-      }
-      };
-
-      // initialize your network!
-      var network = new vis.Network(container, data, options);
-
-
-      $(document).ready(function(){
-        network.once('initRedraw', function() {
-        network.moveTo({
-          scale : 1.0,
-          offset : {x: 400, y:300},
-          animation : true
-        });
-        // console.log(network.getViewPosition());
-        });
-        $("#preloader").css("display", "none");
-
-         $("#graph_animation").on('hidden.bs.modal', function () {
-                  nodes.clear();
-                  edges.clear();
-                  nodes.add(graphInitNodes);
-          });
-
-        $('[data-toggle="tooltip"]').tooltip();
-
-
-        network.on("click", function(args){
-          if(args.nodes.length){
-            // console.log(args.nodes);
-            // alert("Clicked");
-            console.log("GRAPH EMMITTED");
-            $("#preloader").css("display", "block");
-            // var g = graph_request(args.nodes[0]);
-
-            var id = args.nodes[0];
-
-
-            // alert("Here");
-            var colors = ["#266348","#6242f4","#00a838","#1c2820","#a80008"];
-            var actualId = id.replace('G', '0');
-            var hierarchy = id.split("-");
-            fs.readFile('TerenceTaoFirstArticle/'+actualId+'.json', {encoding:"utf8"}, (err, data)=>{
-              if(err){
-                  console.log("invalid ID");
-                  alert(err);
-                  return;
-              }
-              var obj = JSON.parse(data);
-              var l = hierarchy.length;
-              var extraNodes = [];
-              var edgePairs = [];
-              for(var i=0; obj.referenced_articles && i<obj.referenced_articles.length; i++){
-                  item = {};
-                  item["label"] = obj.referenced_articles[i].articleId;
-                  item["id"] = id+"-"+i;
-                  item["color"]={
-                      border : colors[l],
-                      background : colors[l],
-                      highlight : colors[l]
-                  };
-                  item["title"] = obj.referenced_articles[i].title;
-
-                  edgePairItem = {};
-                  edgePairItem.from = id;
-                  edgePairItem.to = item["id"];
-                  extraNodes.push(item);
-                  edgePairs.push(edgePairItem);
-              }
-              var graph = {};
-              graph.nodes = extraNodes;
-              graph.edges = edgePairs;
-              // alert(JSON.stringify(graph));
-              nodes.add(graph.nodes);
-              edges.add(graph.edges);
-              $("#preloader").css("display", "none");
-
-            });
-          }
-        });
-      });
-    </script>
-
-    <!-- RREF ENDS -->
-
-
-    <script>
-        if (window.module) module = window.module;
-    </script>
-
-    <script>
-        $('#my-graph1').on('click', function() {
-            var update = {
-                width: 1200, // or any new width
-                height: 700 // " "
-            };
-
-            Plotly.relayout('my-graph1', update);
-            $('#my-graph2').hide();
-            $('#my-graph3').hide();
-            $('#my-graph4').hide();
-        });
-
-        $('#my-graph2').on('click', function() {
-            var update = {
-                width: 1200, // or any new width
-                height: 700 // " "
-            };
-            $('#my-graph2').animate({
-                'marginLeft': "-=600px" //moves left
-            });
-            Plotly.relayout('my-graph2', update);
-
-            $('#my-graph1').hide();
-            $('#my-graph3').hide();
-            $('#my-graph4').hide();
-        });
-        $('#my-graph3').on('click', function() {
-            var update = {
-                width: 1200, // or any new width
-                height: 700 // " "
-            };
-
-            Plotly.relayout('my-graph3', update);
-            $('#my-graph1').hide();
-            $('#my-graph2').hide();
-            $('#my-graph4').hide();
-        });
-        $('#my-graph4').on('click', function() {
-            var update = {
-                width: 1200, // or any new width
-                height: 700 // " "
-            };
-            $('#my-graph4').animate({
-                'marginLeft': "-=600px" //moves left
-            });
-            Plotly.relayout('my-graph4', update);
-            $('#my-graph1').hide();
-            $('#my-graph2').hide();
-            $('#my-graph3').hide();
-        });
-        $('.graph1').on('click', function() {
-            var update = {
-                width: 1200, // or any new width
-                height: 700 // " "
-            };
-
-            Plotly.relayout(this.id, update);
-            $('.graph2').hide();
-            $('.graph3').hide();
-            $('.graph4').hide();
-            $('#goback').show();
-
-        });
-        $('.graph2').on('click', function() {
-            var update = {
-                width: 1200, // or any new width
-                height: 700 // " "
-            };
-            Plotly.relayout(this.id, update);
-            $('.graph1').hide();
-            $('.graph3').hide();
-            $('.graph4').hide();
-            $('#goback').show();
-        });
-        $('.graph3').on('click', function() {
-            var update = {
-                width: 1200, // or any new width
-                height: 700 // " "
-            };
-
-            Plotly.relayout(this.id, update);
-            $('.graph1').hide();
-            $('.graph2').hide();
-            $('.graph4').hide();
-            $('#goback').show();
-        });
-        $('.graph4').on('click', function() {
-            var update = {
-                width: 1200, // or any new width
-                height: 700 // " "
-            };
-            Plotly.relayout(this.id, update);
-            $('.graph1').hide();
-            $('.graph2').hide();
-            $('.graph3').hide();
-            $('#goback').show();
-        });
-        $('#goback').on('click',function(){
-            var update = {
-                width: 600, // or any new width
-                height: 600 // " "
-            };
-            var graph1id=$(".graph1").attr('id');
-            var graph2id=$(".graph2").attr('id');
-            var graph3id=$(".graph3").attr('id');
-            var graph4id=$(".graph4").attr('id');
-            Plotly.relayout(graph1id, update);
-            Plotly.relayout(graph2id, update);
-            Plotly.relayout(graph3id, update);
-            Plotly.relayout(graph4id, update);
-            $('.graph1').show();
-            $('.graph2').show();
-            $('.graph3').show();
-            $('.graph4').show();
-            $('#goback').hide();
-        })
-    </script>
-    <script>
-    $('#search-query').on('click',function(){
-        $('.results').show();
-    })
-        function showgraph(test) {
-            $('.results').hide();
-            console.log('clicking')
-            var update = {
-                width: 600, // or any new width
-                height: 600 // " "
-            };
-            $('.graph1').show();
-            $('.graph2').show();
-            $('.graph3').show();
-            $('.graph4').show();
-
-            id1 = 'graph-' + test + '1';
-            $(".graph1").attr('id', id1);
-            id2 = 'graph-' + test + '2';
-            $(".graph2").attr('id', id2);
-            id3 = 'graph-' + test + '3';
-            $(".graph3").attr('id', id3);
-            id4 = 'graph-' + test + '4';
-            $(".graph4").attr('id', id4);
-            $(".sub").show();
-            $(".main").hide();
-            path = "public/files/graphcsv/" + test + ".csv"
-            console.log(path)
-            name1 = 'graph-' + test + '1';
-            name2 = 'graph-' + test + '2';
-            name3 = 'graph-' + test + '3';
-            name4 = 'graph-' + test + '4';
-
-            Plotly.d3.csv(path, function(err, rows) {
-                trace00 = {
-                    x: rows.map(function(row) {
-                        return row['Year']
-                    }),
-                    y: rows.map(function(row) {
-                        return row['ArticleCount']
-                    }),
-                    name: 'ArticleCount',
-                    text: rows.map(function(row) {
-                        return row['Month']
-                    }),
-                    type: 'bar',
-                    xaxis: 'x',
-                    yaxis: 'y',
-                };
-                trace01 = {
-                    x: rows.map(function(row) {
-                        return row['Year']
-                    }),
-                    y: rows.map(function(row) {
-                        return row['CitationCount']
-                    }),
-                    name: 'CitationCount',
-                    text: rows.map(function(row) {
-                        return row['Month']
-                    }),
-                    type: 'bar',
-                };
-                data0 = [trace00, trace01];
-                layout0 = {
-                    autosize: true,
-                    hovermode: 'closest',
-                    title: "Article count vs Citation Count",
-                    xaxis: {
-                        autorange: true,
-                        domain: [0, 1],
-                        range: [2004.5, 2016.5],
-                        type: 'linear'
-                    },
-                    yaxis: {
-                        autorange: true,
-                        domain: [0, 1],
-                        range: [0, 100],
-                        type: 'linear'
-                    }
-                };
-                Plotly.plot(name1, {
-                    data: data0,
-                    layout: layout0,
-                });
-
-                Plotly.d3.csv(path, function(err, rows) {
-                    var POP_TO_PX_SIZE = 2e10;
-                    var trace1 = {
-                        mode: 'markers',
-                        type: 'bar',
-                        x: rows.map(function(row) {
-                            return row['Year']
-                        }),
-                        y: rows.map(function(row) {
-                            return row['CitationCount']
-                        }),
-                        text: rows.map(function(row) {
-                            return row['Name']
-                        }),
-                    };
-
-                    layout1 = {
-                        autosize: true,
-                        hovermode: 'closest',
-                        legend: {
-                            x: 0.5,
-                            y: -0.25,
-                            orientation: "h",
-                            traceorder: "normal",
-                            xanchor: "center",
-                        },
-
-                        title: "Citation count vs Year",
-                        xaxis: {
-                            autorange: true,
-                            range: [2009.5, 2016.5],
-                            title: 'Year',
-                            type: 'linear'
-                        },
-                        yaxis: {
-                            autorange: true,
-                            range: [0, 4047.36842105],
-                            title: 'Citation Count',
-                            type: 'linear'
-                        }
-                    };
-                    Plotly.plot(name2, [trace1], layout1, {
-                        showLink: false
-                    });
-                });
-                Plotly.d3.csv(path, function(err, rows) {
-                    var POP_TO_PX_SIZE = 2e10;
-                    var trace2 = {
-                        mode: 'markers',
-                        type: 'bar',
-                        x: rows.map(function(row) {
-                            return row['Year']
-                        }),
-                        y: rows.map(function(row) {
-                            return row['ArticleCount']
-                        }),
-                        text: rows.map(function(row) {
-                            return row['Name']
-                        }),
-                    };
-
-                    var layout2 = {
-                        autosize: true,
-                        hovermode: "closest",
-                        legend: {
-                            x: 0.5,
-                            y: -0.25,
-                            orientation: "h",
-                            traceorder: "normal",
-                            xanchor: "center"
-                        },
-
-                        title: "Article count vs Year",
-                        xaxis: {
-                            autorange: true,
-                            fixedrange: false,
-                            range: [1982.5, 2016.5],
-                            title: "Year",
-                            type: "linear"
-                        },
-                        yaxis: {
-                            autorange: true,
-                            range: [0, 33.6842105263],
-                            title: "Article Count",
-                            type: "linear"
-                        }
-                    };
-                    Plotly.plot(name3, [trace2], layout2, {
-                        showLink: false
-                    });
-                });
-                Plotly.d3.csv(path, function(err, rows) {
-                    var POP_TO_PX_SIZE = 2e10;
-                    var trace3 = {
-                        mode: 'markers',
-                        type: 'pie',
-                        direction: "counterclockwise",
-                        hoverinfo: "label+value+text+percent",
-                        sort: true,
-                        textinfo: "value+percent",
-                        labels: rows.map(function(row) {
-                            return row['Month']
-                        }),
-                        values: rows.map(function(row) {
-                            return row['ArticleCount']
-                        }),
-                        text: rows.map(function(row) {
-                            return row['Name']
-                        }),
-                    };
-
-                    var layout3 = {
-                        autosize: true,
-                        hovermode: "closest",
-                        legend: {
-                            x: 1.00343949045,
-                            y: 0.910994764398
-                        },
-                        title: "Article Count per month"
-                    };
-                    Plotly.plot(name4, [trace3], layout3, {
-                        showLink: false
-                    });
-                });
-
-            });
-            Plotly.relayout(name1, update);
-            Plotly.relayout(name2, update);
-            Plotly.relayout(name3, update);
-            Plotly.relayout(name4, update);
-            Plotly.deleteTraces(name1, 0);
-            Plotly.deleteTraces(name1, 0);
-            Plotly.deleteTraces(name2, 0);
-            Plotly.deleteTraces(name3, 0);
-            Plotly.deleteTraces(name4, 0);
-
-        }
-
-    </script>
-    <!-- <script>
-    var $modal = $('#myModal').modal({
-    show: false
-});
-$('#my-graph1').on('click', function() {
-    $modal.modal('show');
-    var html ='<p id="my-graph1"></p>'
-    $('#myModal').on('shown.bs.modal', function() {
-  $('#myModal').find('.modal-body').html(html);
-});
-
-});</script> -->
-    <script>
-        $(document).ready(function() {
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+        <script src="public/javascripts/bootstrap.min.js"></script>
+        <script src="public/javascripts/plotly-latest.min.js"></script>
+        <script src="public/javascripts/flat-ui.js"></script>
+        <script src="public/javascripts/vis.min.js"></script>
+        <script>
+            if (window.module) module = window.module;
+        </script>
+        <script src="public/javascripts/rref.js"></script>
+        <script src="public/javascripts/graph.js"></script>
+        <script>
             var express = require('express');
             var router = express.Router();
             var request = require("request");
@@ -875,48 +127,10 @@ $('#my-graph1').on('click', function() {
             var reqq = require("sync-request")
             var Datastore = require('nedb'),
                 db = new Datastore({
-                    filename: './mydatabase.db'
+                    filename: __dirname + 'databases/mydatabase.db'
                 });
             searchdb = new Datastore({
-                filename: './search.db'
-            });
-            var firstNode = {
-                id : "G",
-                label : "5452187",
-                color:{
-                    border : "#a80008",
-                    background:"#a80008",
-                    highlight : "#a80008"
-                },
-                title : "The Power of Convex Relaxation: Near-Optimal Matrix Completion"
-            };
-            var edgePair = {};
-            var graph = {};
-            graph.nodes = firstNode;
-            graph.edges = edgePair;
-
-            var firstArticle ={};
-            fs.readFile('public/files/TerenceTaoFirstArticle/0.json', {encoding:"utf8"}, (err, data)=>{
-                if(err) throw err;
-                var obj = JSON.parse(data);
-                firstArticle["title"] = obj.title;
-                firstArticle["articleId"] = obj.articleId;
-                firstArticle["publisher"] = obj.publisher;
-                firstArticle["doi"] = obj.doi;
-                firstArticle["dirStructure"] = obj.dirStructure;
-                firstArticle["authors"] = obj.authors;
-
-                var ch = [];
-                for(var i=0; i<obj.referenced_articles.length; i++){
-                    item = {};
-                    item["title"] = obj.referenced_articles[i].title;
-                    item["articleId"] = obj.referenced_articles[i].articleId;
-                    item["id"] = "0-"+i;
-                    ch.push(item);
-                }
-                firstArticle["referenced_articles"] = ch;
-
-
+                filename: __dirname + 'databases/search.db'
             });
             db.loadDatabase(function(err) { // Callback is optional
                 // Now commands will be executed
@@ -946,7 +160,11 @@ $('#my-graph1').on('click', function() {
                 db.find({
                     name: new RegExp(test, 'i')
                 }, function(err, docs) {
-                    // docs contains Mars and Earth
+                    if (test != "") {
+                        searchdb.insert({
+                            query: test
+                        }, function(err, newDoc) {});
+                    }
                     for (var i = 0; i < docs.length; i++) {
                         var html = '<li><a onclick="showgraph(\'' + docs[i]['name'] + '\')">' + docs[i]['name'] + '</a></li>'
                         $('.results').append(html)
@@ -965,7 +183,6 @@ $('#my-graph1').on('click', function() {
             var data = [];
             util.generateJournalList(function(journals) {
                 console.log(journals)
-
                 console.log(journals.length)
                 for (var i = 0; i < journals.length; i++) {
                     var exists = true;
@@ -974,51 +191,10 @@ $('#my-graph1').on('click', function() {
                     };
                     db.insert({
                         name: journals[i]
-                    }, function(err, newDoc) { // Callback is optional
-                        // newDoc is the newly inserted document, including its _id
-                        // newDoc has no key called notToBeSaved since its value was undefined
-                    });
+                    }, function(err, newDoc) {});
                 }
-
-
-
-
             });
-
-            $("#quicksearch").on('click', function() {
-                $('.results').html("")
-                query = $('#search-query').val()
-                searchdb.insert({
-                    query: query
-                }, function(err, newDoc) { // Callback is optional
-                    // newDoc is the newly inserted document, including its _id
-                    // newDoc has no key called notToBeSaved since its value was undefined
-                });
-                db.find({
-                    name: new RegExp(query, 'i')
-                }, function(err, docs) {
-                    // docs contains Mars and Earth
-                    for (var i = 0; i < docs.length; i++) {
-                        var html = '<a onclick="showgraph(\'' + docs[i]['name'] + '\')">' + docs[i]['name'] + '</a>' + '<br>'
-                        $('.results').append(html)
-                    }
-                });
-            });
-
-
-        })
-
-        // util.generateJournalList(function(journals) {
-        //         util.generateAllArticleCitvsYearCsv();
-        //         for (k = 0; k < journals.length; k++) {
-        //             util.generateArticleCitvsYearCsv(journals[k]);
-        //         }
-        //         util.writetoCSV();
-        //
-        //     })
-    </script>
-
-
+        </script>
 </body>
 
 </html>

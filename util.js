@@ -43,12 +43,14 @@ module.exports = {
         var NEO4J_PASS = "scibase";
         var query = "MATCH (j:Journal) RETURN j.Name as Name";
 
-            // console.log(return_param);
+        // console.log(return_param);
 
         var request_json = {
-            "statements": [{
-                "statement": query
-            }]
+            "statements": [
+                {
+                    "statement": query
+                }
+            ]
         };
         var auth_payload = new Buffer(NEO4J_USER + ":" + NEO4J_PASS).toString('base64');
         var res = request({
@@ -65,10 +67,10 @@ module.exports = {
                 //console.log(JSON.stringify(response_body));
                 try {
                     data = body.results[0]
-fs.writeFileSync(path.join(__dirname, "public/files/graphcsv/", "Journals.csv"), module.exports.jsonToCsv(body), 'utf-8');
+                    fs.writeFileSync(path.join(__dirname, "public/files/graphcsv/", "Journals.csv"), module.exports.jsonToCsv(body), 'utf-8');
                     for (var i = 0; i < data.data.length; i++) {
                         journal = ""
-                            //console.log(data.data[i].row[0]);
+                        //console.log(data.data[i].row[0]);
                         journal = data.data[i].row[0].toString();
                         journals.push(journal);
                         console.log(journals)
@@ -77,8 +79,6 @@ fs.writeFileSync(path.join(__dirname, "public/files/graphcsv/", "Journals.csv"),
                     console.log("Callback before")
 
                     console.log("Callback after")
-
-
 
                 } catch (e) {
                     console.log("Error:", e.message);
@@ -89,7 +89,6 @@ fs.writeFileSync(path.join(__dirname, "public/files/graphcsv/", "Journals.csv"),
             callback(journals.sort())
         });
     },
-
 
     generateArticleCitvsYearCsv: function(i) {
 
@@ -105,43 +104,42 @@ fs.writeFileSync(path.join(__dirname, "public/files/graphcsv/", "Journals.csv"),
         kk = i + ".csv"
 
         var request_json = {
-            "statements": [{
-                "statement": query
-            }]
+            "statements": [
+                {
+                    "statement": query
+                }
+            ]
         };
         var auth_payload = new Buffer(NEO4J_USER + ":" + NEO4J_PASS).toString('base64');
 
+        console.log("fetching : %s", i)
 
-
-
-console.log("fetching : %s",i)
-
-    var res = request({
-        url: NEO4J_API_URL,
-        method: "POST",
-        json: request_json,
-        headers: {
-            "Authorization": "Basic " + auth_payload,
-            "Accept": "application/json; charset=UTF-8"
-        }
-    }, function(err, response, body) {
-        data[i] = body;
-        name[i] = kk;
-        count=count+1;
-        console.log(count)
+        var res = request({
+            url: NEO4J_API_URL,
+            method: "POST",
+            json: request_json,
+            headers: {
+                "Authorization": "Basic " + auth_payload,
+                "Accept": "application/json; charset=UTF-8"
+            }
+        }, function(err, response, body) {
+            data[i] = body;
+            name[i] = kk;
+            count = count + 1;
+            console.log(count)
         });
 
     },
-    writetoCSV:function(){
+    writetoCSV: function() {
         console.log("writing")
         console.log(data)
         console.log(count)
-        for(i=0;i<count;i++){
-            console.log("writing: %s",name[i])
-        fs.writeFileSync(path.join(__dirname, "public/files/graphcsv/", name[i]), module.exports.jsonToCsv(data[i]), 'utf-8');
-    }
+        for (i = 0; i < count; i++) {
+            console.log("writing: %s", name[i])
+            fs.writeFileSync(path.join(__dirname, "public/files/graphcsv/", name[i]), module.exports.jsonToCsv(data[i]), 'utf-8');
+        }
     },
-//fs.writeFileSync(path.join(__dirname, "public/files/graphcsv/", kk), module.exports.jsonToCsv(body), 'utf-8');
+    //fs.writeFileSync(path.join(__dirname, "public/files/graphcsv/", kk), module.exports.jsonToCsv(body), 'utf-8');
 
     generateAllArticleCitvsYearCsv: function() {
         var NEO4J_API_URL = "http://pesitsouthscibase.org:7474/db/data/transaction/commit";
@@ -152,9 +150,11 @@ console.log("fetching : %s",i)
         console.log("fetching");
 
         var request_json = {
-            "statements": [{
-                "statement": query
-            }]
+            "statements": [
+                {
+                    "statement": query
+                }
+            ]
         };
         var auth_payload = new Buffer(NEO4J_USER + ":" + NEO4J_PASS).toString('base64');
         var res = request({
@@ -179,5 +179,5 @@ console.log("fetching : %s",i)
                 console.log("Unable to generate Journal.csv !");
             }
         });
-    },
+    }
 };
