@@ -237,6 +237,7 @@ $('.graph2').on('click', function() {
         height: 700 // " "
     };
     Plotly.relayout(this.id, update);
+    $('.graph2').addClass("move-left")
     $('.graph1').hide();
     $('.graph3').hide();
     $('.graph4').hide();
@@ -259,6 +260,7 @@ $('.graph4').on('click', function() {
         height: 700 // " "
     };
     Plotly.relayout(this.id, update);
+$('.graph4').addClass("move-left")
     $('.graph1').hide();
     $('.graph2').hide();
     $('.graph3').hide();
@@ -266,17 +268,20 @@ $('.graph4').on('click', function() {
 });
 $('#goback').on('click', function() {
     var update = {
-        width: 600, // or any new width
-        height: 600 // " "
+        width: 525, // or any new width
+        height: 475 // " "
     };
     var graph1id = $(".graph1").attr('id');
     var graph2id = $(".graph2").attr('id');
     var graph3id = $(".graph3").attr('id');
     var graph4id = $(".graph4").attr('id');
+    $('.graph2').removeClass("move-left")
+    $('.graph4').removeClass("move-left")
     Plotly.relayout(graph1id, update);
     Plotly.relayout(graph2id, update);
     Plotly.relayout(graph3id, update);
     Plotly.relayout(graph4id, update);
+
     $('.graph1').show();
     $('.graph2').show();
     $('.graph3').show();
